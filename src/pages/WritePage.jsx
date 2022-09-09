@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Write from '../components/write/Write';
 import WriteShow from '../components/write/WriteShow';
 import styled from 'styled-components';
 
 const WritePage = () => {
+  const [markdown, setMarkdown] = useState('')
   return (
     <StyledDiv>
-      <Write/>
-      <WriteShow/>
+      <Write setMarkdown={setMarkdown}/>
+      <WriteShow markdown={markdown}/>
     </StyledDiv>
   );
 };

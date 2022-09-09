@@ -5,9 +5,9 @@ import { MdOutlineArrowBack } from "react-icons/md";
 const WriteFooter = () => {
   return (
     <StyledDiv>
-      <StyledButton color="black" bg="white">
-        <MdOutlineArrowBack size="25px" />
-        나가기
+      <StyledButton color="black" bg="white" display="flex">
+        <MdOutlineArrowBack size="23px" />
+        &nbsp; 나가기
       </StyledButton>
       <StyledInnerDiv>
         <StyledButton bg="white" color="#14B886">
@@ -38,6 +38,8 @@ const StyledInnerDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
+  display: ${props=>props.display};
+  align-items: center;
   margin: 20px;
   cursor: pointer;
   background-color: ${(props) => props.bg || "#14B886"};
@@ -46,8 +48,8 @@ const StyledButton = styled.button`
   font-weight: 500;
   width: 125px;
   height: 55px;
-  border: none;
   border-radius: 6px;
+  align-items: center;
   &:hover {
     background-color: ${(props) => props.hover || "#F4F4F4"};
   }
