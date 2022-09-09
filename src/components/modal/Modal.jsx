@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDom from "react-dom";
+import useChange from "../../hooks/useChange";
+
 import {
   Background,
   ModalBox,
@@ -21,6 +23,9 @@ import {
 } from "./styles";
 
 function Modal({ modalHandler }) {
+  const [isChange, onChangeHandler] = useChange();
+
+  useEffect(() => {}, [isChange]);
   return ReactDom.createPortal(
     <Background>
       <ModalBox>
@@ -43,16 +48,16 @@ function Modal({ modalHandler }) {
           </ExitBox>
           <Container>
             <ParentContainer>
-              <Span fontSize="20px">로그인</Span>
+              <Span fontSize="20px">{isChange ? "회원가입" : "로그인"}</Span>
               <Span fontSize="15px" fontColor="#9e9e9e">
-                이메일로 로그인
+                이메일로 {isChange ? "회원가입" : "로그인"}
               </Span>
               <ChildContainer margin={"15px 0px 10px 0px"}>
                 <Input placeholder="이메일을 입력하세요" />
                 <Button>로그인</Button>
               </ChildContainer>
               <Span fontSize="15px" fontColor="#9e9e9e">
-                소셜 계정으로 로그인
+                소셜 계정으로 {isChange ? "회원가입" : "로그인"}
               </Span>
               <ChildContainer margin={"1.5rem"}>
                 <Image src={process.env.PUBLIC_URL + "./assets/github.png"} />
@@ -62,7 +67,9 @@ function Modal({ modalHandler }) {
             </ParentContainer>
             <Footer>
               <span>아직 회원이 아니신가요?</span>
-              <LinkText>회원가입</LinkText>
+              <LinkText onClick={() => onChangeHandler()}>
+                {isChange ? "로그인" : "회원가입"}
+              </LinkText>
             </Footer>
           </Container>
         </WihteBox>
