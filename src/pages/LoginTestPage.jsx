@@ -1,13 +1,13 @@
 import React from "react";
-import SigninModal from "../components/signin/SigninModal";
-import useShowModal from "../hooks/useShowModal";
+import ShowModal from "../components/modal/ShowModal";
+import useChange from "../hooks/useChange";
 
 function LoginTestPage() {
-  const [isModal, ModalHandler] = useShowModal();
+  const [isModal, ModalHandler] = useChange();
   return (
     <>
       <button onClick={() => ModalHandler()}>로그인</button>
-      <SigninModal show={isModal} modalHandler={ModalHandler} />
+      <ShowModal show={isModal} modalHandler={ModalHandler} />
     </>
   );
 }
