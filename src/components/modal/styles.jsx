@@ -129,8 +129,8 @@ const LinkText = styled.li`
   cursor: pointer;
 `;
 
-const Input = styled.input`
-  width: 250px;
+const InputStyle = styled.input`
+  width: ${(props) => props.width};
   height: 45px;
   border-style: solid;
   border-color: #dbdbdb;
@@ -141,6 +141,9 @@ const Input = styled.input`
     outline: 0.1px solid #12b886;
   }
 `;
+function Input({ width, ...rest }) {
+  return <InputStyle width={width} {...rest}></InputStyle>;
+}
 
 /* Button */
 const Button = styled.button`
@@ -149,6 +152,17 @@ const Button = styled.button`
 
   color: white;
   font-size: 15px;
+
+  background-color: #5ab98f;
+  border-style: solid;
+  border-color: transparent;
+`;
+const LoginButton = styled.button`
+  width: 359px;
+  height: 30px;
+
+  color: white;
+  font-size: 14px;
 
   background-color: #5ab98f;
   border-style: solid;
@@ -166,7 +180,6 @@ const Image = styled.img`
   height: 40px;
   border-radius: 70%;
   border-style: solid;
-  /* border-color: #dbdbdb; */
   border-color: transparent;
 
   overflow: hidden;
@@ -185,6 +198,7 @@ export {
   ChildContainer,
   Input,
   Button,
+  LoginButton,
   Image,
   ExitImg,
   WelcomText,
