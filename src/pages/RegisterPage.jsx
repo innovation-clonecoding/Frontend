@@ -1,9 +1,10 @@
 import React from "react";
+import Register from "../components/register/Register";
 
 function RegisterPage() {
   return (
     <>
-      <div>회원가입 페이지</div>
+      <Register />
     </>
   );
 }
