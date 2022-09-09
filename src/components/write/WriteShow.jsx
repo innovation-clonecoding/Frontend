@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import remarkGfm from "remark-gfm";
 import MarkdownPreview from "@uiw/react-markdown-preview"
 
 const WriteShow = ({ markdown }) => {
