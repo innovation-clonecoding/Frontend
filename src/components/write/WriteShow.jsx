@@ -1,10 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const WriteShow = () => {
   return (
-    <div className='basis 1/2'>
-    </div>
+    <StyledDiv>
+    </StyledDiv>
   );
 };
 
 export default WriteShow;
+
+const StyledDiv = styled.div`
+  height: 100vh;
+  position: relative;
+  background-color: #FBFDFC;
+`
