@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const WriteTextArea = () => {
+const WriteTextArea = ({value, onChange}) => {
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
 
@@ -18,6 +18,8 @@ const WriteTextArea = () => {
       placeholder="당신의 이야기를 적어보세요..."
       onKeyUp={autoTextAreaReize}
       onKeyDown={autoTextAreaReize}
+      value={value}
+      onChange={onChange}
     ></StyledTextArea>
   );
 };
@@ -43,19 +45,7 @@ const StyledTextArea = styled.textarea`
   :focus {
     outline: none;
   }
-  /* ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display: none;
   }
-   */
-  ::-webkit-scrollbar {
-  width: 10px;
-} 
-::-webkit-scrollbar-track {
-					/* 스크롤이 움직이는 영역  */
-      background-color: transparent;
-} 
-::-webkit-scrollbar-thumb {
-					/*  스크롤  */
-      background-color: black; 
-} 
 `;

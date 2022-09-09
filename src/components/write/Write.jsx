@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import WriteFooter from "./WriteFooter";
 import WriteTextArea from "./WriteTextArea";
 import WriteTitle from "./WriteTitle";
+const Write = (props) => {
 
-const Write = () => {
+  const handleChange = (e) => {
+    props.setMarkdown(e.target.value)
+  }
+
   return (
     <StyledDiv>
       <StyledInnerDiv>
@@ -12,7 +16,7 @@ const Write = () => {
           <WriteTitle />
         </div>
         <div>
-          <WriteTextArea />
+          <WriteTextArea onChange={handleChange}/>
         </div>
       </StyledInnerDiv>
       <div>
