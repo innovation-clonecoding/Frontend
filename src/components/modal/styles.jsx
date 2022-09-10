@@ -148,7 +148,7 @@ function Input({ width, ...rest }) {
 /* Button */
 const Button = styled.button`
   width: 95px;
-  height: 50px;
+  height: 45px;
 
   color: white;
   font-size: 15px;
@@ -158,7 +158,7 @@ const Button = styled.button`
   border-color: transparent;
 `;
 const LoginButton = styled.button`
-  width: 359px;
+  width: 345px;
   height: 30px;
 
   color: white;
