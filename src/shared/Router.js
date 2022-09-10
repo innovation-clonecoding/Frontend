@@ -6,6 +6,7 @@ import WritePage from "../pages/WritePage";
 import RegisterPage from "../pages/RegisterPage";
 import SearchPage from "pages/SearchPage";
 import SettingPage from "pages/SettingPage";
+import MyvelogPage from "pages/MyvelogPage";
 
 const Router = () => {
   return (
@@ -18,6 +19,8 @@ const Router = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/setting" element={<SettingPage />} />
+        <Route path="/myvelog" element={<MyvelogPage />} />
+        <Route path="/myvelog/:nickname" element={<MyvelogPage />} />
       </Routes>
     </BrowserRouter>
   );
