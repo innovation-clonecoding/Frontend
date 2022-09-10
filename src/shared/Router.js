@@ -5,6 +5,7 @@ import LoginTestPage from "../pages/LoginTestPage";
 import WritePage from "../pages/WritePage";
 import RegisterPage from "../pages/RegisterPage";
 import SearchPage from "pages/SearchPage";
+import SettingPage from "pages/SettingPage";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/write" element={<WritePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/setting" element={<SettingPage />} />
       </Routes>
     </BrowserRouter>
   );
