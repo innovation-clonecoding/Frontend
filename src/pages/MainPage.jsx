@@ -1,5 +1,5 @@
 import { apis } from "api/api";
-import NavBar from "components/navBar/NavBar";
+import NavBar from "components/navbar/NavBar";
 import React, { useEffect, useState } from "react";
 
 function MainPage() {
