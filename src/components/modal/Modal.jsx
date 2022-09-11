@@ -26,7 +26,7 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-function Modal({ modalHandler }) {
+function Modal({ show, modalHandler }) {
   const navigate = useNavigate();
   const [isChange, onChangeHandler] = useChange();
   const [email, setEmail, onChangeEmail] = useInput();
@@ -82,7 +82,7 @@ function Modal({ modalHandler }) {
                   <Button onClick={() => doubleCheckEmail()}>로그인</Button>
                 </ChildContainer>
               ) : (
-                <Login />
+                <Login show={show} modalHandler={modalHandler} />
               )}
 
               <Span fontSize="15px" fontColor="#9e9e9e">
