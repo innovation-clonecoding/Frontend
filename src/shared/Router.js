@@ -20,7 +20,6 @@ const Router = () => {
 				<Route path="/write" element={<WritePage />} />
         <Route path="/detail" element={<DetailPage />} />
 				<Route path="/register" element={<RegisterPage />} />
-        <Route path="/detail" element={<DetailPage />} />
 				<Route path="/search" element={<SearchPage />} />
 				<Route path="/setting" element={<SettingPage />} />
 				<Route path="/myvelog" element={<MyvelogPage />} />
