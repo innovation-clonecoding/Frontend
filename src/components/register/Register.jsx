@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import useChange from "../../hooks/useChange";
+import { useLocation } from "react-router-dom";
 import {
   ParentBox,
   Box,
@@ -16,6 +17,7 @@ import {
 
 function Register() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [email, setEmail, onChangeEmail] = useInput();
   const [nickName, setNickName, onChangeNickName] = useInput();
@@ -67,7 +69,9 @@ function Register() {
     }
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    setEmail(state);
+  });
 
   return (
     <ParentBox>
@@ -82,10 +86,9 @@ function Register() {
           )}
           <InputWrapper>
             <Input
-              placeholder="이메일을 입력하세요"
               name="email"
-              value={email}
-              onChange={onChangePassword}
+              defaultValue={state}
+              disabled
               onFocus={() => onChangeIsFocusEmail()}
               onBlur={() => onChangeIsFocusEmail()}
             />
