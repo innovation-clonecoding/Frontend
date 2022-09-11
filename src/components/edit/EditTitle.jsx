@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import WriteToolBox from './WriteToolBox';
+import WriteToolBox from './EditToolBox';
 
-const WriteTitle = () => {
+const EditTitle = () => {
   return (
     <StyledDiv>
       <div>
-        <StyledTitleInput placeholder='제목을 입력하세요'/>
+        <StyledTitleInput placeholder='제목을 입력하세요' defaultValue={"기존 제목이 이곳에 들어갑니다"}/>
       </div>
       <hr style={{"height":"8px", "backgroundColor":"#495057", "border":"none", "width":"80px"}}/>
       <div className='elements'>
@@ -19,7 +19,7 @@ const WriteTitle = () => {
   );
 };
 
-export default WriteTitle;
+export default EditTitle;
 
 const StyledDiv = styled.div`
 width: 100%;
