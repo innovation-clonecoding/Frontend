@@ -10,5 +10,9 @@ const api = axios.create({
 });
 
 export const apis = {
+	// Post
 	getPost: () => api.get("post"),
+
+	// Comment
+	getComment: () => api.get("comment"),
 };
