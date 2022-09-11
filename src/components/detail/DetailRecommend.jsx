@@ -1,15 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import DetailRecommendItem from "./DetailRecommendItem";
 
 const DetailRecommend = () => {
   return (
     <StyledDiv>
-      <div>
-      이전포스트
-      </div>
-    <div>
-      <div><StyledImg src='https://velog.velcdn.com/images/danchoi/post/d0e77ac1-d191-4ee5-8787-5e457f3445e6/image.jpeg' alt=''/></div>
-    </div>
+      <StyledTitle>관심 있을 만한 포스트</StyledTitle>
+      <StyledItemsDiv>
+        <DetailRecommendItem />
+        <DetailRecommendItem />
+        <DetailRecommendItem />
+        <DetailRecommendItem />
+        <DetailRecommendItem />
+        <DetailRecommendItem />
+      </StyledItemsDiv>
     </StyledDiv>
   );
 };
@@ -17,10 +21,13 @@ const DetailRecommend = () => {
 export default DetailRecommend;
 
 const StyledDiv = styled.div`
-  
-`
-const StyledImg = styled.img`
-width: 45vw;
-height: 30vh;
-  
-`
+margin: 5rem 0;
+`;
+
+const StyledTitle = styled.h4`
+  font-size: 1.125rem;
+`;
+const StyledItemsDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
