@@ -19,4 +19,5 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
