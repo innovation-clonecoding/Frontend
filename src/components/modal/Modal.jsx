@@ -32,11 +32,15 @@ function Modal({ modalHandler }) {
   const [email, setEmail, onChangeEmail] = useInput();
 
   const doubleCheckEmail = () => {
-    apis.doubleCheck(email).then((res) => {
-      if (res.data !== null) {
-        navigate(`/register`, { state: res.data.email });
-      }
-    });
+    if (!email) {
+      alert("이메일을 입력하세요!");
+    } else {
+      apis.doubleCheck(email).then((res) => {
+        if (res.data !== null) {
+          navigate(`/register`, { state: res.data.email });
+        }
+      });
+    }
   };
 
   useEffect(() => {}, [isChange]);

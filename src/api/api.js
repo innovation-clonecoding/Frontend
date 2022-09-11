@@ -16,6 +16,11 @@ export const apis = {
       email: data,
     });
   },
+  signup: (data) => {
+    return api.post("users", {
+      data,
+    });
+  },
   // Post
   getPost: () => api.get("post"),
 

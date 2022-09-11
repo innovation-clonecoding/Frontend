@@ -14,6 +14,7 @@ import {
   Input,
   Button,
 } from "./styles";
+import { apis } from "api/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -69,6 +70,27 @@ function Register() {
     }
   };
 
+  let userData = {
+    email: email,
+    password: password,
+    passwordConfirm: passwordConfirm,
+    nickname: nickName,
+    introduction: introduction,
+  };
+
+  const onSubmit = () => {
+    console.log("data", !introduction);
+    if (!(email, password && passwordConfirm && nickName && introduction)) {
+      alert("모두 입력하세요!");
+    } else if (!(isPassword && isPasswordConfirm)) {
+      alert("비밀번호를 다시 확인하세요.");
+    } else {
+      apis.signup(userData).then((res) => console.log("res", res.data));
+      alert("회원가입이 완료!");
+      navigate("/");
+    }
+  };
+
   useEffect(() => {
     setEmail(state);
   });
@@ -121,6 +143,7 @@ function Register() {
             <Input
               placeholder="비밀번호를 입력하세요"
               name="password"
+              type="password"
               value={password}
               onChange={onChangePassword}
               onFocus={() => onChangeIsFocusPassword()}
@@ -144,6 +167,7 @@ function Register() {
               placeholder="비밀번호를 다시 입력하세요"
               name="passwordConfirm"
               value={passwordConfirm}
+              type="password"
               onChange={doubleCheckPassword}
               onFocus={() => onChangeIsFocusConfirm()}
               onBlur={() => onChangeIsFocusConfirm()}
@@ -185,7 +209,8 @@ function Register() {
           backColor="#12B886"
           fontColor="#FFFFFF"
           hoverColor="#20C997"
-          disabled={!(isPassword && isPasswordConfirm)}
+          // disabled={!(isPassword && isPasswordConfirm)}
+          onClick={() => onSubmit()}
         >
           다음
         </Button>
