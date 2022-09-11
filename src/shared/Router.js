@@ -18,6 +18,7 @@ const Router = () => {
 				{/* 모달 테스트 페이지 */}
 				<Route path="/test" element={<LoginTestPage />} />
 				<Route path="/write" element={<WritePage />} />
+        <Route path="/detail" element={<DetailPage />} />
 				<Route path="/register" element={<RegisterPage />} />
         <Route path="/detail" element={<DetailPage />} />
 				<Route path="/search" element={<SearchPage />} />
