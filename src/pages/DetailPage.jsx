@@ -7,6 +7,7 @@ import styled from "styled-components";
 import React from "react";
 import NavBar from "components/navbar/NavBar";
 import DetailFixedButton from "components/detail/DetailFixedButton";
+import Comments from "components/comment/Comments";
 
 const DetailPage = () => {
   return (
@@ -19,6 +20,7 @@ const DetailPage = () => {
         <DetailContent />
         <DetailAccount />
         <DetailRecommend />
+        <Comments/>
         <DetailComment />
       </StyledInnerDiv>
       </StyledDiv>
