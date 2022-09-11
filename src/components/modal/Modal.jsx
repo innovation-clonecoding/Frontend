@@ -25,6 +25,7 @@ import {
   LinkText,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import SocialLogin from "components/login/SocialLogin";
 
 function Modal({ modalHandler }) {
   const navigate = useNavigate();
@@ -88,11 +89,7 @@ function Modal({ modalHandler }) {
               <Span fontSize="15px" fontColor="#9e9e9e">
                 소셜 계정으로 {isChange ? "회원가입" : "로그인"}
               </Span>
-              <ChildContainer margin={"1.5rem"}>
-                <Image src={process.env.PUBLIC_URL + "./assets/github.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/google.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/facebook.png"} />
-              </ChildContainer>
+              <SocialLogin />
             </ParentContainer>
             <Footer>
               <span>아직 회원이 아니신가요?</span>
