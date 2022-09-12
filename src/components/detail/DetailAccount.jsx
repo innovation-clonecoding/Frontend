@@ -3,17 +3,23 @@ import styled from "styled-components";
 import { AiFillGithub } from "react-icons/ai";
 import { GrMail } from "react-icons/gr";
 
-const DetailAccount = () => {
+const DetailAccount = ({profileUrl, nickname, introduction}) => {
+
+  const handleImgError =(e)=>{
+    e.target.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+  }
+
   return (
     <StyledDiv>
       <StyledFlexDiv>
         <StyledImg
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-          alt=""
+          src={profileUrl}
+          onError={handleImgError}
+          alt="profile_img"
         />
         <StyledUserInfo>
-          <StyledUserName>UserName</StyledUserName>
-          <StyledIntroduction>Introduction</StyledIntroduction>
+          <StyledUserName>{nickname}</StyledUserName>
+          <StyledIntroduction>{introduction}</StyledIntroduction>
         </StyledUserInfo>
       </StyledFlexDiv>
       <StyledHr />

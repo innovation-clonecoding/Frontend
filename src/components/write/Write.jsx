@@ -20,7 +20,7 @@ const Write = (props) => {
         </div>
       </StyledInnerDiv>
       <div>
-        <WriteFooter />
+        <WriteFooter onSubmit = {props.onSubmit}/>
       </div>
     </StyledDiv>
   );
