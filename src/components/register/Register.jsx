@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import useChange from "../../hooks/useChange";
+import { useLocation } from "react-router-dom";
 import {
   ParentBox,
   Box,
@@ -13,9 +14,12 @@ import {
   Input,
   Button,
 } from "./styles";
+import { apis } from "api/api";
+import { userApis } from "api/userApi";
 
 function Register() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const [email, setEmail, onChangeEmail] = useInput();
   const [nickName, setNickName, onChangeNickName] = useInput();
@@ -67,7 +71,37 @@ function Register() {
     }
   };
 
-  useEffect(() => {});
+  let userData = {
+    email: email,
+    password: password,
+    passwordConfirm: passwordConfirm,
+    nickname: nickName,
+    introduction: introduction,
+  };
+
+  const onSubmit = () => {
+    if (!(email, password && passwordConfirm && nickName && introduction)) {
+      alert("모두 입력하세요!");
+    } else if (!(isPassword && isPasswordConfirm)) {
+      alert("비밀번호를 다시 확인하세요.");
+    } else {
+      userApis
+        .signup(userData)
+        .then((res) => {
+          alert("회원가입 완료!");
+          navigate(`/`);
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "중복된 닉네임이 있습니다.") {
+            alert("중복된 닉네임입니다!");
+          }
+        });
+    }
+  };
+
+  useEffect(() => {
+    setEmail(state);
+  });
 
   return (
     <ParentBox>
@@ -82,10 +116,9 @@ function Register() {
           )}
           <InputWrapper>
             <Input
-              placeholder="이메일을 입력하세요"
               name="email"
-              value={email}
-              onChange={onChangePassword}
+              defaultValue={state}
+              disabled
               onFocus={() => onChangeIsFocusEmail()}
               onBlur={() => onChangeIsFocusEmail()}
             />
@@ -118,6 +151,7 @@ function Register() {
             <Input
               placeholder="비밀번호를 입력하세요"
               name="password"
+              type="password"
               value={password}
               onChange={onChangePassword}
               onFocus={() => onChangeIsFocusPassword()}
@@ -141,6 +175,7 @@ function Register() {
               placeholder="비밀번호를 다시 입력하세요"
               name="passwordConfirm"
               value={passwordConfirm}
+              type="password"
               onChange={doubleCheckPassword}
               onFocus={() => onChangeIsFocusConfirm()}
               onBlur={() => onChangeIsFocusConfirm()}
@@ -182,7 +217,8 @@ function Register() {
           backColor="#12B886"
           fontColor="#FFFFFF"
           hoverColor="#20C997"
-          disabled={!(isPassword && isPasswordConfirm)}
+          // disabled={!(isPassword && isPasswordConfirm)}
+          onClick={() => onSubmit()}
         >
           다음
         </Button>

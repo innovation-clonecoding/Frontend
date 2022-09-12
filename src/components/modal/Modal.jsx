@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
+import useInput from "hooks/useInput";
 import useChange from "../../hooks/useChange";
 import Login from "../login/Login";
+import { __doubleCheck } from "redux/modules/users";
 import {
   Background,
   ModalBox,
@@ -21,9 +23,36 @@ import {
   ExitContainer,
   LinkText,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
+import SocialLogin from "components/login/SocialLogin";
+import { userApis } from "api/userApi";
 
-function Modal({ modalHandler }) {
+function Modal({ show, modalHandler }) {
+  const navigate = useNavigate();
   const [isChange, onChangeHandler] = useChange();
+  const [email, setEmail, onChangeEmail] = useInput();
+
+  const doubleCheckEmail = () => {
+    if (!email) {
+      alert("이메일을 입력하세요!");
+    } else {
+      userApis
+        .doubleCheck(email)
+        .then((res) => {
+          const { data } = res;
+          if (res.data.msg === "회원가입을 진행하세요.") {
+            navigate(`/register`, { state: data.data.email });
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "중복된 이메일이 있습니다.") {
+            alert("중복된 이메일입니다.");
+          } else {
+            alert("잘못된 이메일 형식입니다.");
+          }
+        });
+    }
+  };
 
   useEffect(() => {}, [isChange]);
   return ReactDom.createPortal(
@@ -54,21 +83,23 @@ function Modal({ modalHandler }) {
               </Span>
               {isChange ? (
                 <ChildContainer margin={"15px 0px 10px 0px"} display="flex">
-                  <Input width="250px" placeholder="이메일을 입력하세요" />
-                  <Button>로그인</Button>
+                  <Input
+                    width="250px"
+                    placeholder="이메일을 입력하세요"
+                    name="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                  />
+                  <Button onClick={() => doubleCheckEmail()}>로그인</Button>
                 </ChildContainer>
               ) : (
-                <Login />
+                <Login show={show} modalHandler={modalHandler} />
               )}
 
               <Span fontSize="15px" fontColor="#9e9e9e">
                 소셜 계정으로 {isChange ? "회원가입" : "로그인"}
               </Span>
-              <ChildContainer margin={"1.5rem"}>
-                <Image src={process.env.PUBLIC_URL + "./assets/github.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/google.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/facebook.png"} />
-              </ChildContainer>
+              <SocialLogin />
             </ParentContainer>
             <Footer>
               <span>아직 회원이 아니신가요?</span>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MarkdownPreview from "@uiw/react-markdown-preview"
 
-const WriteShow = ({ markdown }) => {
+const EditShow = ({ markdown }) => {
   document.documentElement.setAttribute('data-color-mode', 'light')
   return (
     <StyledDiv>
@@ -13,7 +13,7 @@ const WriteShow = ({ markdown }) => {
   );
 };
 
-export default WriteShow;
+export default EditShow;
 
 const StyledDiv = styled.div`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",

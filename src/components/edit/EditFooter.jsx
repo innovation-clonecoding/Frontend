@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdOutlineArrowBack } from "react-icons/md";
 
-const WriteFooter = ({onSubmit}) => {
+const EditFooter = () => {
   return (
     <StyledDiv>
       <StyledButton color="black" bg="white" display="flex">
@@ -13,13 +13,13 @@ const WriteFooter = ({onSubmit}) => {
         <StyledButton bg="white" color="#14B886">
           임시저장
         </StyledButton>
-        <StyledButton hover="#21C997" onClick={onSubmit}>출간하기</StyledButton>
+        <StyledButton hover="#21C997">출간하기</StyledButton>
       </StyledInnerDiv>
     </StyledDiv>
   );
 };
 
-export default WriteFooter;
+export default EditFooter;
 const StyledDiv = styled.div`
   position: fixed;
   display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const WriteTextArea = ({value, onChange}) => {
+const EditTextArea = ({value, onChange}) => {
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
 
@@ -20,11 +20,11 @@ const WriteTextArea = ({value, onChange}) => {
       onKeyDown={autoTextAreaReize}
       value={value}
       onChange={onChange}
-    ></StyledTextArea>
+    >기존 게시글이 이곳에 들어갑니다</StyledTextArea>
   );
 };
 
-export default WriteTextArea;
+export default EditTextArea;
 
 const StyledTextArea = styled.textarea`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",

@@ -4,7 +4,7 @@ import { TbH1, TbH2, TbH3, TbH4 } from "react-icons/tb";
 import { BiBold, BiItalic } from "react-icons/bi";
 import { MdFormatStrikethrough, MdCode } from "react-icons/md";
 import { IoMdQuote, IoMdLink, IoMdImage } from "react-icons/io";
-const WriteToolBox = ({tag}) => {
+const EditToolBox = () => {
   const upLoadImg = useRef()
   const openFile = () => {
     upLoadImg.current.click()
@@ -51,7 +51,7 @@ const WriteToolBox = ({tag}) => {
   );
 };
 
-export default WriteToolBox;
+export default EditToolBox;
 
 const StyledDiv = styled.div`
   display: flex;
