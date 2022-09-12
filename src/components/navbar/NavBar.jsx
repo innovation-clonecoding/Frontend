@@ -7,7 +7,7 @@ function NavBar() {
 
 	return (
 		<>
-			<div className="h-[64px] grid">
+			<div className="h-[64px] w-full grid">
 				<div className="flex">
 					<h1 className="flex-grow ml-20 font-bold text-[30px] mt-2">velog</h1>
 					<div className="flex gap-4 mr-20">
@@ -23,15 +23,19 @@ function NavBar() {
 						<button onClick={(e) => setDropdownVisibility(!dropdownVisibility)}>
 							{dropdownVisibility ? "Close" : "Open"}
 						</button>
+						<Dropdown visibility={dropdownVisibility}>
+							<div className="">
+								<div className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500">
+									로그아웃
+								</div>
+								<div className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500">
+									내 벨로그
+								</div>
+							</div>
+						</Dropdown>
 					</div>
 				</div>
 			</div>
-			<Dropdown visibility={dropdownVisibility}>
-				<div className="relative z-10">
-					<div className="h-10 hover:bg-white">로그아웃</div>
-					<div className="h-10">내 벨로그</div>
-				</div>
-			</Dropdown>
 		</>
 	);
 }

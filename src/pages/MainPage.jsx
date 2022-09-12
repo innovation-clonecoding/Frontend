@@ -13,7 +13,7 @@ function MainPage() {
 
 	return (
 		<>
-			<div className="relative z-0 h-full bg-gray-50">
+			<div className="relative z-0 w-full h-full bg-gray-50">
 				<NavBar />
 				<div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
 					{postList &&
@@ -33,7 +33,7 @@ function MainPage() {
 								<span className="p-4 pb-2 mt-3 text-sm text-gray-500">
 									{post.date} · {post.commentsNum}개의 댓글
 								</span>
-								<div className="absolute flex items-center w-full h-auto ml-4 text-sm text-gray-500 bottom-2">
+								<div className="absolute flex items-center w-full ml-4 text-sm text-gray-500 h-fit bottom-2">
 									by&nbsp;
 									<div className="font-bold text-black">{post.nickname}</div>
 								</div>
