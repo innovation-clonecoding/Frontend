@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
+import useInput from "hooks/useInput";
 import useChange from "../../hooks/useChange";
-
+import Login from "../login/Login";
+import { __doubleCheck } from "redux/modules/users";
+import { apis } from "api/api";
 import {
   Background,
   ModalBox,
@@ -21,9 +24,24 @@ import {
   ExitContainer,
   LinkText,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 function Modal({ modalHandler }) {
+  const navigate = useNavigate();
   const [isChange, onChangeHandler] = useChange();
+  const [email, setEmail, onChangeEmail] = useInput();
+
+  const doubleCheckEmail = () => {
+    if (!email) {
+      alert("이메일을 입력하세요!");
+    } else {
+      apis.doubleCheck(email).then((res) => {
+        if (res.data !== null) {
+          navigate(`/register`, { state: res.data.email });
+        }
+      });
+    }
+  };
 
   useEffect(() => {}, [isChange]);
   return ReactDom.createPortal(
@@ -52,10 +70,21 @@ function Modal({ modalHandler }) {
               <Span fontSize="15px" fontColor="#9e9e9e">
                 이메일로 {isChange ? "회원가입" : "로그인"}
               </Span>
-              <ChildContainer margin={"15px 0px 10px 0px"}>
-                <Input placeholder="이메일을 입력하세요" />
-                <Button>로그인</Button>
-              </ChildContainer>
+              {isChange ? (
+                <ChildContainer margin={"15px 0px 10px 0px"} display="flex">
+                  <Input
+                    width="250px"
+                    placeholder="이메일을 입력하세요"
+                    name="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                  />
+                  <Button onClick={() => doubleCheckEmail()}>로그인</Button>
+                </ChildContainer>
+              ) : (
+                <Login />
+              )}
+
               <Span fontSize="15px" fontColor="#9e9e9e">
                 소셜 계정으로 {isChange ? "회원가입" : "로그인"}
               </Span>

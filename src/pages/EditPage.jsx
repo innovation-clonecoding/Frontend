@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import Write from '../components/write/Write';
-import WriteShow from '../components/write/WriteShow';
+import Edit from '../components/edit/Edit';
+import EditShow from '../components/edit/EditShow';
 import styled from 'styled-components';
 
-const WritePage = () => {
+const EditPage = () => {
   const [markdown, setMarkdown] = useState('')
   return (
     <StyledDiv>
-      <Write setMarkdown={setMarkdown}/>
-      <WriteShow markdown={markdown}/>
+      <Edit setMarkdown={setMarkdown}/>
+      <EditShow markdown={markdown}/>
     </StyledDiv>
   );
 };
 
-export default WritePage;
+export default EditPage;
 
 const StyledDiv = styled.div`
   display: grid;
