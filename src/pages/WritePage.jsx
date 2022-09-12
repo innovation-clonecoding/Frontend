@@ -3,22 +3,21 @@ import Write from "../components/write/Write";
 import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import axios from "axios";
-import { useRef } from "react";
 
 const WritePage = () => {
   const [markdown, setMarkdown] = useState("");
-  const title = useRef(null);
-  const content = useRef(null);
-  const imgUrl = useRef(null);
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [imgUrl, setImgUrl] = useState('')
   const [tag, setTag] = useState([]);
-
-  console.log(tag)
   const writeData = {
     title: title,
     content: content,
     imgUrl: imgUrl,
-    setTag: setTag,
+    tag: tag
   };
+  console.log(tag)
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
@@ -37,9 +36,12 @@ const WritePage = () => {
       <Write
         setMarkdown={setMarkdown}
         onSubmit={onSubmitHandler}
-        writeData={writeData}
+        setTitle={setTitle}
+        setContent={setContent}
+        setImgUrl={setImgUrl}
+        setTag={setTag}
       />
-      <WriteShow markdown={markdown} />
+      <WriteShow markdown={markdown}/>
     </StyledDiv>
   );
 };

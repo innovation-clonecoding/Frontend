@@ -12,7 +12,6 @@ const WriteShow = ({ markdown }) => {
     </StyledDiv>
   );
 };
-
 export default WriteShow;
 
 const StyledDiv = styled.div`

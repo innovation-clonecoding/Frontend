@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import WriteToolBox from './WriteToolBox';
 
-const WriteTitle = ({title, imgUrl, setTag}) => {
+const WriteTitle = (props) => {
 
   const [tagItem, setTagItem] = useState('')
   const [tagList, setTagList] = useState([])
 
   const onKeyDown = e => {
     if(e.target.value !=='' && e.key === 'Enter'){
+      tagValue()
       submitTag()
     }
   }
@@ -22,17 +23,22 @@ const WriteTitle = ({title, imgUrl, setTag}) => {
     const tagInput = document.querySelector('#tagInput')
     tagInput.value=null
   }
+  const handleChange = () => {
+
+  }
   const deleteTag = e => {
     const deleteItem = e.target.parentElement.firstChild.innerText
     const filterTag = tagList.filter(tagItem=>tagItem!==deleteItem)
     setTagList(filterTag)
     console.log(deleteItem)
   }
-  console.log(tagList)
+  const tagValue =()=>{
+    props.setTag([...tagList])
+  }
   return (
     <StyledDiv>
       <div>
-        <StyledTitleInput ref={title} placeholder='제목을 입력하세요'/>
+        <StyledTitleInput placeholder='제목을 입력하세요' onChange={(e)=>{}}/>
       </div>
       <hr style={{"height":"8px", "backgroundColor":"#495057", "border":"none", "width":"80px"}}/>
       <div className='elements'>
@@ -43,10 +49,10 @@ const WriteTitle = ({title, imgUrl, setTag}) => {
             </TagItem>
           )
         })}
-        <StyledTagInput id="tagInput" placeholder='태그를 입력하세요' onChange={e=>setTagItem(e.target.value)} onKeyDown={onKeyDown} tabIndex={2}/>
+        <StyledTagInput id="tagInput" placeholder='태그를 입력하세요' onChange={e=>setTagItem(e.target.value)} onKeyDown={onKeyDown}/>
       </div>
       <div className='elements'>
-        <WriteToolBox imgUrl={imgUrl}/>
+        <WriteToolBox imgUrl={props.imgUrl}/>
       </div>
     </StyledDiv>
   );
