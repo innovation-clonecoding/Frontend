@@ -1,11 +1,9 @@
-import { apis } from "api/api";
-import useInput from "hooks/useInput";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ChildContainer, Input, Button, LoginButton } from "../modal/styles";
+import { userApis } from "api/userApi";
+import useInput from "hooks/useInput";
+import { Input, LoginButton } from "../modal/styles";
 
 function Login({ show, modalHandler }) {
-  const navigate = useNavigate();
   const [email, setEmail, onChangeEmail] = useInput();
   const [password, setPassword, onChangePassword] = useInput();
 
@@ -13,16 +11,21 @@ function Login({ show, modalHandler }) {
     if (!(email, password)) {
       alert("이메일, 비밀번호를 입력하세요!");
     } else {
-      // 백엔드 연동시 에러 처리 필요
-      apis.signin(email, password).then((res) => {
-        // 로그인 성공시
-        if (res.data !== null) {
-          alert("로그인 완료!");
-          return modalHandler();
-        }
-        // 로그인 실패 (이메일 존재 여부)
-        // 로그인 실패 (비밀번호 일치 여부)
-      });
+      userApis
+        .signin(email, password)
+        .then((res) => {
+          if (res.msg === "로그인 되었습니다.") {
+            alert("로그인 완료!");
+            return modalHandler();
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "비밀번호가 일치하지 않습니다.") {
+            alert("비밀번호가 일치하지 않습니다.");
+          } else {
+            alert("존재하지 않는 이메일 입니다.");
+          }
+        });
     }
   };
 
