@@ -4,7 +4,6 @@ import useInput from "hooks/useInput";
 import useChange from "../../hooks/useChange";
 import Login from "../login/Login";
 import { __doubleCheck } from "redux/modules/users";
-import { apis } from "api/api";
 import {
   Background,
   ModalBox,
@@ -25,6 +24,8 @@ import {
   LinkText,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import SocialLogin from "components/login/SocialLogin";
+import { userApis } from "api/userApi";
 
 function Modal({ show, modalHandler }) {
   const navigate = useNavigate();
@@ -35,11 +36,21 @@ function Modal({ show, modalHandler }) {
     if (!email) {
       alert("이메일을 입력하세요!");
     } else {
-      apis.doubleCheck(email).then((res) => {
-        if (res.data !== null) {
-          navigate(`/register`, { state: res.data.email });
-        }
-      });
+      userApis
+        .doubleCheck(email)
+        .then((res) => {
+          const { data } = res;
+          if (res.data.msg === "회원가입을 진행하세요.") {
+            navigate(`/register`, { state: data.data.email });
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "중복된 이메일이 있습니다.") {
+            alert("중복된 이메일입니다.");
+          } else {
+            alert("잘못된 이메일 형식입니다.");
+          }
+        });
     }
   };
 
@@ -88,11 +99,7 @@ function Modal({ show, modalHandler }) {
               <Span fontSize="15px" fontColor="#9e9e9e">
                 소셜 계정으로 {isChange ? "회원가입" : "로그인"}
               </Span>
-              <ChildContainer margin={"1.5rem"}>
-                <Image src={process.env.PUBLIC_URL + "./assets/github.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/google.png"} />
-                <Image src={process.env.PUBLIC_URL + "./assets/facebook.png"} />
-              </ChildContainer>
+              <SocialLogin />
             </ParentContainer>
             <Footer>
               <span>아직 회원이 아니신가요?</span>
