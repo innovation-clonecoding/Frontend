@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const DetailComment = () => {
+const DetailComment = ({commentsList}) => {
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  const handleImgError =(e)=>{
+    e.target.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+  }
   return (
-    <StyledDiv>
+    <>
+    {commentsList?.map((comment,idx)=>(
+    <StyledDiv key={idx}>
       <StyledInnerDiv>
           <StyledImg
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            src={comment.profileImg}
+            onError={handleImgError}
             alt="img"
           />
         <StyledFlexDiv>
           <StyledCommentInfo>
-            <StyledText className="userName">userName</StyledText>
-            <StyledText>date</StyledText>
+            <StyledText className="userName">{comment.nickname}</StyledText>
+            <StyledText>{comment.date}</StyledText>
           </StyledCommentInfo>
           <StyledButtonDiv>
-            <StyledButton>수정</StyledButton>
-            <StyledButton>삭제</StyledButton>
+            {isAuthorized&&
+            <><StyledButton>수정</StyledButton>
+            <StyledButton>삭제</StyledButton></>
+            }
           </StyledButtonDiv>
         </StyledFlexDiv>
       </StyledInnerDiv>
       <div>
-        <div>content</div>
+        <div>{comment.content}</div>
       </div>
     </StyledDiv>
+    ))}
+    </>
   );
 };
 
