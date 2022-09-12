@@ -15,6 +15,7 @@ import {
   Button,
 } from "./styles";
 import { apis } from "api/api";
+import { userApis } from "api/userApi";
 
 function Register() {
   const navigate = useNavigate();
@@ -79,15 +80,22 @@ function Register() {
   };
 
   const onSubmit = () => {
-    console.log("data", !introduction);
     if (!(email, password && passwordConfirm && nickName && introduction)) {
       alert("모두 입력하세요!");
     } else if (!(isPassword && isPasswordConfirm)) {
       alert("비밀번호를 다시 확인하세요.");
     } else {
-      apis.signup(userData).then((res) => console.log("res", res.data));
-      alert("회원가입이 완료!");
-      navigate("/");
+      userApis
+        .signup(userData)
+        .then((res) => {
+          alert("회원가입 완료!");
+          navigate(`/`);
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "중복된 닉네임이 있습니다.") {
+            alert("중복된 닉네임입니다!");
+          }
+        });
     }
   };
 
