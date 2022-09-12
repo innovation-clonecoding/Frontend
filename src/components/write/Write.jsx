@@ -3,8 +3,7 @@ import styled from "styled-components";
 import WriteFooter from "./WriteFooter";
 import WriteTextArea from "./WriteTextArea";
 import WriteTitle from "./WriteTitle";
-const Write = (props) => {
-
+const Write = (props, {title, imgUrl, content, setTag}) => {
   const handleChange = (e) => {
     props.setMarkdown(e.target.value)
   }
@@ -13,10 +12,10 @@ const Write = (props) => {
     <StyledDiv>
       <StyledInnerDiv>
         <div>
-          <WriteTitle />
+          <WriteTitle title={title} imgUrl={imgUrl} setTag={setTag}/>
         </div>
         <div>
-          <WriteTextArea onChange={handleChange}/>
+          <WriteTextArea onChange={handleChange} content={content} imgUrl={imgUrl}/>
         </div>
       </StyledInnerDiv>
       <div>
