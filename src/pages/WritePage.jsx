@@ -10,21 +10,15 @@ const WritePage = () => {
   const [content, setContent] = useState('')
   const [imgUrl, setImgUrl] = useState('')
   const [tag, setTag] = useState([]);
-  const writeData = {
-    title: title,
-    content: content,
-    imgUrl: imgUrl,
-    tag: tag
-  };
-  console.log(tag)
-
+  console.log(title)
+  console.log(markdown)
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
       title: title,
-      content: content,
+      content: markdown,
       imgUrl: imgUrl,
-      setTag: setTag,
+      tag: tag
     };
     await axios.post("http://localhost:3001/write", { data }).then((res) => {
       console.log(res);
@@ -37,11 +31,11 @@ const WritePage = () => {
         setMarkdown={setMarkdown}
         onSubmit={onSubmitHandler}
         setTitle={setTitle}
-        setContent={setContent}
         setImgUrl={setImgUrl}
         setTag={setTag}
       />
       <WriteShow markdown={markdown}/>
+  
     </StyledDiv>
   );
 };
