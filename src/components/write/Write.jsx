@@ -12,10 +12,10 @@ const Write = (props) => {
     <StyledDiv>
       <StyledInnerDiv>
         <div>
-          <WriteTitle setTitle={props.setTitle} setImgUrl={props.setImgUrl} setTag={props.setTag}/>
+          <WriteTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag}/>
         </div>
         <div>
-          <WriteTextArea onChange={handleChange} setContent={props.setContent} setImgUrl={props.setImgUrl}/>
+          <WriteTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image}/>
         </div>
       </StyledInnerDiv>
       <div>
