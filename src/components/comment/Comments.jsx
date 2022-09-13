@@ -7,7 +7,6 @@ function Comments() {
 	useEffect(() => {
 		apis.getComment().then((response) => setCommentList(response.data));
 	}, []);
-
 	return (
 		<div className="flex items-center justify-center">
 			<div className="flex flex-col w-[780px]">
@@ -42,8 +41,14 @@ function Comments() {
 												{comment.date}
 											</div>
 										</div>
+										<div className="ml-auto">
+											<span className="m-2 text-sm text-gray-400">수정</span>
+											<span className="text-sm text-gray-400">삭제</span>
+										</div>
 									</div>
-									<div className="my-10">{comment.content}</div>
+									<div className="my-10" name="comment">
+										{comment.content}
+									</div>
 								</div>
 							</>
 						))}
