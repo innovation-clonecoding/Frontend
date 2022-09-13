@@ -1,4 +1,5 @@
-import React from "react";
+import { userApis } from "api/userApi";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   UserInfoContainer,
@@ -9,13 +10,20 @@ import {
 } from "./styles";
 
 function UserInfo() {
+  const [nickName, setNickName] = useState();
+  const [imgUrl, setImgUrl] = useState();
+  const [introduction, setIntroduction] = useState();
+
+  useEffect(() => {
+    // userApis.getUserInfo().then((res) => console.log("res", res));
+  });
   return (
     <Container>
       <UserInfoContainer>
         <Image src="http://file3.instiz.net/data/file3/2018/03/15/a/9/9/a999fc50792aefcc8fc2a550bd52f82d.jpg" />
         <Description>
-          <UserNicknName>NickName</UserNicknName>
-          <Introduction>한 줄 소개</Introduction>
+          <UserNicknName>{nickName}</UserNicknName>
+          <Introduction>{introduction}</Introduction>
         </Description>
       </UserInfoContainer>
     </Container>

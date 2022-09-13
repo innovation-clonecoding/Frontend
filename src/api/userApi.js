@@ -52,6 +52,14 @@ export const userApis = {
       console.log("error", error);
     }
   },
+  getUserInfo: async () => {
+    try {
+      const { data } = api.get("/auth/member/profile-info");
+      return data;
+    } catch (error) {
+      return error.response;
+    }
+  },
 };
 
 export const silentRefresh = () => {
