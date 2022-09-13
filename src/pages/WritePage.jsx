@@ -18,8 +18,10 @@ const WritePage = () => {
       imgUrl: image,
       tag: tag
     };
-    await axios.post("http://localhost:3001/write", { data }).then((res) => {
+    await axios.post("http://15.164.163.50:8080/auth/post", data).then((res) => {
       console.log(res);
+    }).catch((err)=>{
+      console.log(err)
     });
   };
   const updateMarkdown = () => {
