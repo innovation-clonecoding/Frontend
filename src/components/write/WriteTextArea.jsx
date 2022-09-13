@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const WriteTextArea = ({value, onChange}) => {
+const WriteTextArea = ({value, setImgUrl, onChange}) => {
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
 
@@ -18,7 +18,6 @@ const WriteTextArea = ({value, onChange}) => {
       placeholder="당신의 이야기를 적어보세요..."
       onKeyUp={autoTextAreaReize}
       onKeyDown={autoTextAreaReize}
-      value={value}
       onChange={onChange}
     ></StyledTextArea>
   );
