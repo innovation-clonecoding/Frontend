@@ -2,6 +2,7 @@ import { userApis } from "api/userApi";
 import Dropdown from "components/dropdown/Dropdown";
 import ShowModal from "components/modal/ShowModal";
 import useChange from "hooks/useChange";
+import useDecodeToken from "hooks/useDecodeToken";
 import useToken from "hooks/useToken";
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
@@ -12,6 +13,8 @@ function NavBar() {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const [isModal, ModalHandler] = useChange();
   const token = useToken();
+  const userInfo = useDecodeToken(token);
+  const nickName = userInfo[1];
 
   const onLogout = () => {
     userApis.logout().then((res) => {
@@ -59,7 +62,10 @@ function NavBar() {
                     >
                       로그아웃
                     </div>
-                    <div className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500">
+                    <div
+                      className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500"
+                      onClick={() => navigate(`/myvelog/${nickName}`)}
+                    >
                       내 벨로그
                     </div>
                   </div>
