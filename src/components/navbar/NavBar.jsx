@@ -1,12 +1,24 @@
+import { userApis } from "api/userApi";
 import Dropdown from "components/dropdown/Dropdown";
 import ShowModal from "components/modal/ShowModal";
 import useChange from "hooks/useChange";
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigate = useNavigate();
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const [isModal, ModalHandler] = useChange();
+
+  const onLogout = () => {
+    userApis.logout().then((res) => {
+      if (res.msg === "로그아웃 되었습니다.") {
+        alert("로그아웃 완료!");
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <>
@@ -32,7 +44,10 @@ function NavBar() {
             </button>
             <Dropdown visibility={dropdownVisibility}>
               <div className="">
-                <div className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500">
+                <div
+                  className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500"
+                  onClick={() => onLogout()}
+                >
                   로그아웃
                 </div>
                 <div className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500">

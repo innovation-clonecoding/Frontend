@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie, setCookie } from "utils/Cookie";
+import { getCookie, removeCookie, setCookie } from "utils/Cookie";
 
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000;
 const access_token = getCookie("access_token");
@@ -42,9 +42,20 @@ export const userApis = {
     );
     return response.data;
   },
+  logout: async () => {
+    try {
+      const { data } = await api.post("/auth/member/logout");
+      removeCookie("access_token");
+      removeCookie("refresh_token");
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
 };
 
 export const silentRefresh = () => {
+  // console.log("access2", access_token);
   api
     .post("member/reissue")
     .then((res) => onLoginSuccess(res.headers["authorization"], refresh_token))
@@ -54,8 +65,8 @@ export const silentRefresh = () => {
 };
 
 const onLoginSuccess = (authorization, refreshToken) => {
-  console.log("access", authorization);
-  console.log("refresh", refreshToken); // 8YcI
+  // console.log("access1", authorization);
+  // console.log("refresh", refreshToken); // 8YcI
 
   setCookie("access_token", authorization);
   setCookie("refresh_token", refreshToken);
