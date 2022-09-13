@@ -4,7 +4,6 @@ import useInput from "hooks/useInput";
 import useChange from "../../hooks/useChange";
 import Login from "../login/Login";
 import { __doubleCheck } from "redux/modules/users";
-import { apis } from "api/api";
 import {
   Background,
   ModalBox,
@@ -26,8 +25,9 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import SocialLogin from "components/login/SocialLogin";
+import { userApis } from "api/userApi";
 
-function Modal({ modalHandler }) {
+function Modal({ show, modalHandler }) {
   const navigate = useNavigate();
   const [isChange, onChangeHandler] = useChange();
   const [email, setEmail, onChangeEmail] = useInput();
@@ -36,11 +36,21 @@ function Modal({ modalHandler }) {
     if (!email) {
       alert("이메일을 입력하세요!");
     } else {
-      apis.doubleCheck(email).then((res) => {
-        if (res.data !== null) {
-          navigate(`/register`, { state: res.data.email });
-        }
-      });
+      userApis
+        .doubleCheck(email)
+        .then((res) => {
+          const { data } = res;
+          if (res.data.msg === "회원가입을 진행하세요.") {
+            navigate(`/register`, { state: data.data.email });
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.msg === "중복된 이메일이 있습니다.") {
+            alert("중복된 이메일입니다.");
+          } else {
+            alert("잘못된 이메일 형식입니다.");
+          }
+        });
     }
   };
 
@@ -83,7 +93,7 @@ function Modal({ modalHandler }) {
                   <Button onClick={() => doubleCheckEmail()}>로그인</Button>
                 </ChildContainer>
               ) : (
-                <Login />
+                <Login show={show} modalHandler={modalHandler} />
               )}
 
               <Span fontSize="15px" fontColor="#9e9e9e">

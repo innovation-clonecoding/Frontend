@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import DetailTags from "./DetailTags";
 
-const DetailTitle = () => {
+const DetailTitle = ({title, nickname, date, tag}) => {
   //로그인 상태에 따른 버튼 변화
   const [isAuthorized, setIsAuthorized] = useState(false);
   return (
     <StyledDiv>
-      <StyledTitle>Title</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
       <StyledNameDateLikeDiv>
         <StyledNameDateDiv>
-          <StyledNameDate>UserName</StyledNameDate>
+          <StyledNameDate>{nickname}</StyledNameDate>
           <div>·</div>
-          <StyledNameDate margin="auto 10px">2022년 9월 10일</StyledNameDate>
+          <StyledNameDate margin="auto 10px">{date}</StyledNameDate>
         </StyledNameDateDiv>
         {isAuthorized ? (
           <div>
@@ -21,6 +22,11 @@ const DetailTitle = () => {
           </div>
         ) : null}
       </StyledNameDateLikeDiv>
+      <StyledTagDiv>
+        {tag?.map((tag, idx)=>(
+          <DetailTags key={idx} tag={tag}/>
+        ))}
+      </StyledTagDiv>
     </StyledDiv>
   );
 };
@@ -58,3 +64,6 @@ const StyledNameDateLikeDiv = styled.div`
 const StyledLikeButton = styled.button`
   margin: auto 10px;
 `;
+const StyledTagDiv = styled.div`
+  margin-bottom: 30px;
+`

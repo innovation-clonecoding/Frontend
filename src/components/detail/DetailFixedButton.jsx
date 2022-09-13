@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {BsShareFill} from 'react-icons/bs'
 import {FaHeart} from 'react-icons/fa'
 
-const DetailFixedButton = () => {
+const DetailFixedButton = ({likesNum}) => {
   return (
     <StyledDiv>
       <StyledIcon><FaHeart/></StyledIcon>
-      <StyledLikeNum>0</StyledLikeNum>
+      <StyledLikeNum>{likesNum}</StyledLikeNum>
       <StyledIcon><BsShareFill/></StyledIcon>
     </StyledDiv>
   );
