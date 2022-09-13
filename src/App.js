@@ -1,10 +1,14 @@
-import { silentRefresh, userApis } from "api/userApi";
+import { silentRefresh } from "api/userApi";
+import useToken from "hooks/useToken";
 import { useEffect } from "react";
 import Router from "./shared/Router";
 
 function App() {
+  const token = useToken();
   useEffect(() => {
-    silentRefresh();
+    if (token) {
+      silentRefresh();
+    }
   });
   return <Router />;
 }

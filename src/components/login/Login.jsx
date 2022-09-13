@@ -16,7 +16,7 @@ function Login({ show, modalHandler }) {
         .then((res) => {
           if (res.msg === "로그인 되었습니다.") {
             alert("로그인 완료!");
-            return modalHandler();
+            window.location.reload();
           }
         })
         .catch((error) => {
