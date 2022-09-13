@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import WriteToolBox from "./WriteToolBox";
 
-const WriteTitle = ({setTitle, setImgUrl, setTag}) => {
+const WriteTitle = ({setTitle, setImage, setTag}) => {
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
   
@@ -63,7 +63,7 @@ const WriteTitle = ({setTitle, setImgUrl, setTag}) => {
         />
       </div>
       <div className="elements">
-        <WriteToolBox />
+        <WriteToolBox setImage={setImage}/>
       </div>
     </StyledDiv>
   );

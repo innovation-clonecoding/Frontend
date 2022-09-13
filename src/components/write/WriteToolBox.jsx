@@ -4,10 +4,23 @@ import { TbH1, TbH2, TbH3, TbH4 } from "react-icons/tb";
 import { BiBold, BiItalic } from "react-icons/bi";
 import { MdFormatStrikethrough, MdCode } from "react-icons/md";
 import { IoMdQuote, IoMdLink, IoMdImage } from "react-icons/io";
-const WriteToolBox = ({tag}) => {
+import { useState } from "react";
+import { useEffect } from "react";
+
+const WriteToolBox = ({setImage}) => {
+  const [imageUpload, setImageUpload] = useState([])
+
+  useEffect(()=>{
+    setImage(imageUpload)
+  })
+
   const upLoadImg = useRef()
   const openFile = () => {
     upLoadImg.current.click()
+  }
+  const onChange = e => {
+    const img = e.target.files[0]
+    setImageUpload([...imageUpload, URL.createObjectURL(img)])
   }
   return (
     <StyledDiv>
@@ -41,7 +54,7 @@ const WriteToolBox = ({tag}) => {
         <IoMdLink />
       </div>
       <div>
-        <input type='file' ref={upLoadImg} style={{"display":"none"}}/>
+        <input type='file' accept="image/jpg, image/png, image/jpeg, image/gif" ref={upLoadImg} style={{"display":"none"}} onChange={onChange}/>
         <IoMdImage onClick={openFile}/>
       </div>
       <div>

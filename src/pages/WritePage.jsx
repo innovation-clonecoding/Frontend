@@ -3,36 +3,40 @@ import Write from "../components/write/Write";
 import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import axios from "axios";
+import { useEffect } from "react";
 
 const WritePage = () => {
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [imgUrl, setImgUrl] = useState('')
+  const [image, setImage] = useState([])
   const [tag, setTag] = useState([]);
-  console.log(title)
-  console.log(markdown)
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
       title: title,
       content: markdown,
-      imgUrl: imgUrl,
+      imgUrl: image,
       tag: tag
     };
     await axios.post("http://localhost:3001/write", { data }).then((res) => {
       console.log(res);
     });
   };
-
+  const updateMarkdown = () => {
+    let updateImg = [...image]
+    setMarkdown(updateImg)
+  }
+  useEffect(()=>{
+  },[])
   return (
     <StyledDiv>
       <Write
         setMarkdown={setMarkdown}
         onSubmit={onSubmitHandler}
         setTitle={setTitle}
-        setImgUrl={setImgUrl}
+        setImage={setImage}
         setTag={setTag}
+        image={image}
       />
       <WriteShow markdown={markdown}/>
   
