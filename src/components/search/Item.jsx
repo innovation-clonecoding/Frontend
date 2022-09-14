@@ -47,6 +47,7 @@ function ItemConponent({ item }) {
     likesNum,
     commentsNum,
     date,
+    tag,
   } = item;
 
   const navigate = useNavigate();
@@ -94,9 +95,11 @@ function ItemConponent({ item }) {
         {/* [내 벨로그] 본문 내용 2줄 정도 가져와야 함 */}
         <Ptag>{content}</Ptag>
         {/* [내 벨로그] 본문 밑 태그 */}
-        {/* <div style={{ marginBottom: "-0.5rem" }}>
-            <TagButton>WIL</TagButton>
-          </div> */}
+        <div style={{ marginBottom: "-0.5rem" }}>
+          {tag.map((item, index) => (
+            <TagButton key={index}>{item}</TagButton>
+          ))}
+        </div>
         {/* [내 벨로그] 00일전, 0개의 댓글, 하트 개수 */}
         <SubInfo>
           <Span>{date}</Span>
