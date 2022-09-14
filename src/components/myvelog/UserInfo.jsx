@@ -20,7 +20,7 @@ function UserInfo() {
       setNickName(res.data.nickname);
       setIntroduction(res.data.introduction);
     });
-  });
+  }, []);
 
   console.log("introduction", introduction);
   return (
