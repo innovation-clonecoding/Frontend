@@ -21,7 +21,6 @@ const EditPage = () => {
 
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState([]);
   const [image, setImage] = useState([]);
   const { postId } = useParams();
 
@@ -32,7 +31,7 @@ const EditPage = () => {
       title: title,
       content: markdown,
       imgUrl: image,
-      tag: tag,
+      tag: detail?.tag,
     };
     userApis.editPost(data, postId);
     // await axios.patch(`http://15.164.163.50:8080/auth/post/${postId}`, data).then((res) => {
@@ -45,6 +44,7 @@ const EditPage = () => {
   const editTag = (tag) => {
     setDetail((prev) => ({ ...prev, tag})); //useState(prev) // prev State
   };
+  console.log(detail?.tag)
   return (
     <StyledDiv>
       <Edit
