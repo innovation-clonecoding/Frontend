@@ -10,7 +10,6 @@ const WriteTextArea = ({
   textStyle,
   setTextStyle,
 }) => {
-
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
 
@@ -30,7 +29,7 @@ const WriteTextArea = ({
     if (textStyle) {
       insertTextStyle();
     }
-  }, [image, header,textStyle]);
+  }, [image, header, textStyle]);
 
   const textArea = document.querySelector(".autoResize");
 
@@ -82,12 +81,13 @@ const WriteTextArea = ({
       textArea.selectionEnd,
       textValue.length
     );
-    const text = "텍스트";
+    const textMessage = "텍스트";
+    const codeMessage = "코드를 입력하세요";
     textArea.focus();
-    if (selectedCursor === "") {
+    if (textStyle !== "```" && selectedCursor === "") {
       textArea.value =
-        beforeCursor + textStyle + text + textStyle + afterCursor;
-    } else if (textStyle === "```") {
+        beforeCursor + textStyle + textMessage + textStyle + afterCursor;
+    } else if (textStyle === "```" && selectedCursor) {
       textArea.value =
         beforeCursor +
         textStyle +
@@ -98,11 +98,18 @@ const WriteTextArea = ({
         afterCursor;
     } else if (textStyle === "```" && selectedCursor === "") {
       textArea.value =
-        beforeCursor + textStyle + "\n" + text + "\n" + textStyle + afterCursor;
+        beforeCursor +
+        textStyle +
+        "\n" +
+        codeMessage +
+        "\n" +
+        textStyle +
+        afterCursor;
     } else {
       textArea.value =
         beforeCursor + textStyle + selectedCursor + textStyle + afterCursor;
     }
+    console.log(selectedCursor);
     setTextStyle("");
   };
   return (

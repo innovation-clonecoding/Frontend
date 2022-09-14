@@ -4,6 +4,7 @@ import styled from "styled-components";
 import WriteFooter from "./WriteFooter";
 import WriteTextArea from "./WriteTextArea";
 import WriteTitle from "./WriteTitle";
+
 const Write = (props) => {
   const handleChange = (e) => {
     props.setMarkdown(e.target.value)

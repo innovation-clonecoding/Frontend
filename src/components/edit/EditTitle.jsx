@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import EditToolBox from './EditToolBox';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import EditToolBox from "./EditToolBox";
 
-const EditTitle = ({setTitle, setImage, setTag}) => {
+const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle }) => {
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
-  
+
   const onKeyPress = (e) => {
     if (e.target.value !== "" && e.key === "Enter") {
       submitTag();
     }
   };
-  useEffect(()=>{
-    setTag(tagList)
-  })
+  useEffect(() => {
+    setTag(tagList);
+  });
   const submitTag = () => {
     let updatedTagList = [...tagList];
     if (!tagList.includes(tagItem)) {
@@ -23,7 +23,6 @@ const EditTitle = ({setTitle, setImage, setTag}) => {
     const tagInput = document.querySelector("#tagInput");
     tagInput.value = null;
   };
-  const handleChange = () => {};
   const deleteTag = (e) => {
     const deleteItem = e.target.parentElement.firstChild.innerText;
     const filterTag = tagList.filter((tagItem) => tagItem !== deleteItem);
@@ -32,45 +31,48 @@ const EditTitle = ({setTitle, setImage, setTag}) => {
 
   return (
     <StyledDiv>
-    <div>
-      <StyledTitleInput
-        placeholder="제목을 입력하세요"
-        onChange={(e) => setTitle(e.target.value)}
-        defaultValue={"기존 제목이 이곳에 들어갑니다"}
+      <div>
+        <StyledTitleInput
+          placeholder="제목을 입력하세요"
+          onChange={(e) => setTitle(e.target.value)}
+          defaultValue={"기존 제목이 이곳에 들어갑니다"}
+        />
+      </div>
+      <hr
+        style={{
+          height: "8px",
+          backgroundColor: "#495057",
+          border: "none",
+          width: "80px",
+        }}
       />
-    </div>
-    <hr
-      style={{
-        height: "8px",
-        backgroundColor: "#495057",
-        border: "none",
-        width: "80px",
-      }}
-    />
-    <div className="elements">
-      {tagList.map((tagItem, idx) => {
-        return (
-          <TagItem key={idx}>
-            <Tag onClick={deleteTag}>{tagItem}</Tag>
-          </TagItem>
-        );
-      })}
-      <StyledTagInput
-        id="tagInput"
-        placeholder="태그를 입력하세요"
-        onChange={(e) => setTagItem(e.target.value)}
-        onKeyPress={onKeyPress}
-      />
-    </div>
-    <div className="elements">
-      <EditToolBox setImage={setImage}/>
-    </div>
-  </StyledDiv>
+      <div className="elements">
+        {tagList.map((tagItem, idx) => {
+          return (
+            <TagItem key={idx}>
+              <Tag onClick={deleteTag}>{tagItem}</Tag>
+            </TagItem>
+          );
+        })}
+        <StyledTagInput
+          id="tagInput"
+          placeholder="태그를 입력하세요"
+          onChange={(e) => setTagItem(e.target.value)}
+          onKeyPress={onKeyPress}
+        />
+      </div>
+      <div className="elements">
+        <EditToolBox
+          setImage={setImage}
+          setHeader={setHeader}
+          setTextStyle={setTextStyle}
+        />
+      </div>
+    </StyledDiv>
   );
 };
 
 export default EditTitle;
-
 
 const StyledDiv = styled.div`
   width: 100%;
