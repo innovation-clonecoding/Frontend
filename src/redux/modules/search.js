@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk, getDefaultMiddleware } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const baseUrl = `http://15.164.163.50:8080/velog?search=`;
-const baseUrl = `http://localhost:3001/posts?title=`;
+const baseUrl = `http://15.164.163.50:8080/velog?search=`;
+// const baseUrl = `http://localhost:3001/posts?title=`;
 
 const initialState = {
   search: [],
@@ -16,8 +16,7 @@ export const __getSearchData = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(baseUrl + `${payload}`);
-      console.log("response", data);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       console.log("errorrrrr", err.response);
       return thunkAPI.rejectWithValue(err.response);

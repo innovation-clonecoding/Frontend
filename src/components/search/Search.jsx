@@ -5,7 +5,7 @@ import Item from "./Item";
 
 function Search() {
   const [searchData, setSearchData, onSearch] = useInput();
-  console.log("searchData", searchData);
+
   return (
     <>
       <ParentBox>
