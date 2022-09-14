@@ -36,11 +36,9 @@ const DetailPage = () => {
 					<DetailContent {...posted} />
 					<DetailAccount {...posted} />
 					<DetailRecommend {...posted} />
-					{/* <Comments/> */}
-					{/* <DetailComment {...posted}/> */}
+					<Comments />
 				</StyledInnerDiv>
 			</StyledDiv>
-			<Comments />
 		</>
 	);
 };

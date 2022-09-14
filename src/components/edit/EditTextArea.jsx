@@ -18,9 +18,9 @@ const EditTextArea = ({value, onChange}) => {
       placeholder="당신의 이야기를 적어보세요..."
       onKeyUp={autoTextAreaReize}
       onKeyDown={autoTextAreaReize}
-      value={value}
+      defaultValue={value}
       onChange={onChange}
-    >기존 게시글이 이곳에 들어갑니다</StyledTextArea>
+    ></StyledTextArea>
   );
 };
 

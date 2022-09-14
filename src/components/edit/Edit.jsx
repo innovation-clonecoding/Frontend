@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import WriteFooter from "./EditFooter";
-import WriteTextArea from "./EditTextArea";
-import WriteTitle from "./EditTitle";
+import EditFooter from "./EditFooter";
+import EditTextArea from "./EditTextArea";
+import EditTitle from "./EditTitle";
 const Edit = (props) => {
-
   const handleChange = (e) => {
     props.setMarkdown(e.target.value)
   }
-
+const value = "게시글 내용"
   return (
     <StyledDiv>
       <StyledInnerDiv>
         <div>
-          <WriteTitle />
+          <EditTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag}/>
         </div>
         <div>
-          <WriteTextArea onChange={handleChange}/>
+          <EditTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image} value={value}/>
         </div>
       </StyledInnerDiv>
       <div>
-        <WriteFooter />
+        <EditFooter onSubmit = {props.onSubmit}/>
       </div>
     </StyledDiv>
   );

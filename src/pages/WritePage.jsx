@@ -24,8 +24,8 @@ const WritePage = () => {
       console.log(err)
     });
   };
- 
-  return (
+
+return (
     <StyledDiv>
       <Write
         setMarkdown={setMarkdown}
