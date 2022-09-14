@@ -1,13 +1,56 @@
 import axios from "axios";
+import { getCookie, removeCookie, setCookie } from "utils/Cookie";
+
+const access_token = getCookie("access_token");
+const refresh_token = getCookie("refresh_token");
 
 const api = axios.create({
-	baseURL: "http://localhost:3001/",
+	baseURL: "http://15.164.163.50:8080/",
 	headers: {
 		"content-type": "application/json;charset=UTF-8",
 		accept: "application/json,",
 	},
 	withCredentials: true,
 });
+// 사용할 부분만 interceptors를 사용하면 됨
+api.interceptors.request.use(function (config) {
+	config.headers.common["Authorization"] = access_token;
+	config.headers.common["Refresh-Token"] = refresh_token;
+	return config;
+});
+
+api.interceptors.response.use(
+	function (response) {
+		return response;
+	},
+	async function (err) {
+		const originalConfig = err.config;
+		if (err.response && err.response.data.status === "403 FORBIDDEN") {
+			// if (!isTokenRefresh) {
+			// isTokenRefresh = true;
+			try {
+				const refreshToken = await getCookie("refresh_token");
+				axios.defaults.headers.common["refresh-token"] = refreshToken;
+				refreshAccessToken();
+				// return api.request(originalConfig);
+			} catch (err) {
+				console.log("error다", err.response);
+				window.location.href = "/";
+			}
+			// }
+			return Promise.reject(err);
+		}
+		return Promise.reject(err);
+	}
+);
+
+const refreshAccessToken = async () => {
+	const response = await axios.post("http://15.164.163.50:8080/member/reissue");
+	const access_token = response.headers["authorization"];
+	setCookie("access_token", access_token); // 이전 MpXU
+	console.log("완료!!!!!!");
+	window.location.reload();
+};
 
 export const apis = {
 	// member
@@ -50,7 +93,7 @@ export const apis = {
 			});
 	},
 	// Post
-	getPost: () => api.get("post"),
+	getPost: () => api.get("recent"),
 
 	// Comment
 	getComment: () => api.get("comment"),
@@ -65,10 +108,8 @@ export const apis = {
 			postId: postId,
 			content: content,
 		}),
-	deleteComment: (postId, content, commentId) =>
+	deleteComment: (commentId) =>
 		api.delete(`/auth/comment/${commentId}`, {
 			PathVariable: commentId,
-			postId: postId,
-			content: content,
 		}),
 };
