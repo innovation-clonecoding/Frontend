@@ -56,11 +56,11 @@ const DetailPage = () => {
       if (str.includes("완료") === true) {
         setLike(like + 1);
         // setIsLike(true);
-        localStorage.setItem("isLike", true);
+        localStorage.setItem(`isLike-${postId}`, true);
       } else {
         setLike(like - 1);
         // setIsLike(false);
-        localStorage.setItem("isLike", false);
+        localStorage.setItem(`isLike-${postId}`, false);
       }
     });
   };
@@ -71,7 +71,7 @@ const DetailPage = () => {
       <StyledDiv>
         <DetailFixedButton
           like={like}
-          //   isLike={isLike}
+          postId={postId}
           onLikesClick={onLikesClick}
         />
         <StyledInnerDiv>

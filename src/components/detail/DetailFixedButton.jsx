@@ -5,9 +5,9 @@ import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { __getLikes } from "redux/modules/likes";
 
-const DetailFixedButton = ({ like, onLikesClick }) => {
+const DetailFixedButton = ({ like, postId, onLikesClick }) => {
   const [alert, setAlert] = useState(false);
-  const isLike = localStorage.getItem("isLike");
+  const isLike = localStorage.getItem(`isLike-${postId}`);
 
   const copyLink = (e) => {
     const like = window.location.href;
