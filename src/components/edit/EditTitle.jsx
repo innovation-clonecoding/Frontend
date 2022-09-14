@@ -3,34 +3,33 @@ import styled from "styled-components";
 import EditToolBox from "./EditToolBox";
 
 const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle, title, tag}) => {
-  console.log(tag)
-  console.log(title)
   const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState(tag);
 
   const onKeyPress = (e) => {
     if (e.target.value !== "" && e.key === "Enter") {
-      submitTag();
+      setTag([...tag, tagItem])
+      setTagItem('')
     }
   };
-  useEffect(() => {
-    setTag(tagList);
-  });
-  const submitTag = () => {
-    let updatedTagList = [...tagList];
-    if (!tagList.includes(tagItem)) {
-      updatedTagList.push(tagItem);
-    }
-    setTagList(updatedTagList);
-    const tagInput = document.querySelector("#tagInput");
-    tagInput.value = null;
-  };
-  const deleteTag = (e) => {
-    const deleteItem = e.target.parentElement.firstChild.innerText;
-    const filterTag = tagList.filter((tagItem) => tagItem !== deleteItem);
-    setTagList(filterTag);
-  };
+ 
+  // const submitTag = () => {
+  //   let updatedTagList = [...tag];
+  //   if (!tag.includes(tagItem)) {
+  //     updatedTagList.push(tagItem);
+  //   }
+  //   setTag(updatedTagList);
+  //   const tagInput = document.querySelector("#tagInput");
+  //   tagInput.value = null;
+  // };
+  
+  const deleteTag = (idx, tagItem) => {
+    const delTag = tag.filter((element,index)=>{
+      return index!==idx
+    })
+    setTag(delTag)
 
+  };
+ 
   return (
     <StyledDiv>
       <div>
@@ -50,14 +49,15 @@ const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle, title,
         }}
       />
       <div className="elements">
-        {tagList?.map((tagItem, idx) => {
+        {tag?.map((tagItem, idx) => {
           return (
             <TagItem key={idx}>
-              <Tag onClick={deleteTag}>{tagItem}</Tag>
+              <Tag onClick={()=>{deleteTag(idx, tagItem)}}>{tagItem}</Tag>
             </TagItem>
           );
         })}
         <StyledTagInput
+          value={tagItem}
           id="tagInput"
           placeholder="태그를 입력하세요"
           onChange={(e) => setTagItem(e.target.value)}

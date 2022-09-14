@@ -1,56 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import Edit from '../components/edit/Edit';
-import EditShow from '../components/edit/EditShow';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import Edit from "../components/edit/Edit";
+import EditShow from "../components/edit/EditShow";
+import styled from "styled-components";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
-import { userApis } from 'api/userApi';
+import { useNavigate, useParams } from "react-router-dom";
+import { userApis } from "api/userApi";
 
 const EditPage = () => {
-	const [detail, setDetail] = useState(null);
+  const navigate = useNavigate();
+  const [detail, setDetail] = useState(null);
   const getData = async () => {
-		await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
-			setDetail(res);
-		});
-	};
-  const post = detail?.data.data
-  console.log(post)
-	useEffect(() => {
-		getData();
-	}, []);
+    await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
+      setDetail(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [markdown, setMarkdown] = useState("");
-  const [title, setTitle] = useState('')
-  const [image, setImage] = useState([])
+  const [title, setTitle] = useState("");
   const [tag, setTag] = useState([]);
-  const {postId} = useParams()
+  const [image, setImage] = useState([]);
+  const { postId } = useParams();
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
-      id: postId,
+      postId: postId,
       title: title,
       content: markdown,
       imgUrl: image,
-      tag: tag
+      tag: tag,
     };
-    userApis.editPost(data, postId)
+    userApis.editPost(data, postId);
     // await axios.patch(`http://15.164.163.50:8080/auth/post/${postId}`, data).then((res) => {
     //   console.log(res);
     // }).catch((err)=>{
     //   console.log(err)
     // });
+    navigate(`/detail/${postId}`);
+  };
+  const editTag = (tag) => {
+    setDetail((prev) => ({ ...prev, tag})); //useState(prev) // prev State
   };
   return (
     <StyledDiv>
-      <Edit 
+      <Edit
         setMarkdown={setMarkdown}
         onSubmit={onSubmitHandler}
         setTitle={setTitle}
         setImage={setImage}
-        setTag={setTag}
+        setTag={editTag}
         image={image}
-        {...post}
+        {...detail}
       />
-      <EditShow markdown={markdown}/>
+      <EditShow markdown={markdown} />
     </StyledDiv>
   );
 };
