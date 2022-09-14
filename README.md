@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Clone-Coding] velog
 
-## Available Scripts
+## 👋 프로젝트 소개
 
-In the project directory, you can run:
+<b> velog 클론코딩 프로젝트입니다. </b>
 
-### `yarn start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 👩🏻‍💻 Contributors 🧑🏻‍💻
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| [박세은](https://github.com/marksenee)        | [김기연](https://github.com/kky7)           | [김진이](https://github.com/kimjini97) | [오정진](https://github.com/OhJungJin) | [최준묵](https://github.com/dan-studio)  |
+| --------------------------------------------- | ------------------------------------------- | -------------------------------------- | -------------------------------------- | ---------------------------------------- |
+| 로그인 / 회원가입 / 좋아요 / 검색 / 태그 기능 | 로그인 / 회원가입 / 게시글 CRUD / 태그 기능 | 댓글 CRUD / 이미지 첨부/ 좋아요 기능   | 댓글 CRUD / 무한스크롤 기능            | 게시글 CRUD / 마크다운 / 공유 기능 <br/> |
+| Front-end                                     | Back-end                                    | Back-end                               | Front-end                              | Front-end                                |
 
-### `yarn test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ Tech Stack 🛠
 
-### `yarn build`
+<img style="margin:5px; border: 2px solid white; border-radius: 20px" src="https://img.shields.io/badge/React-blue?style=flat-square&logo=react&logoColor=white"/>
+<img style="margin:5px; border: 2px solid white; border-radius: 20px" src="https://img.shields.io/badge/SpringBoot-green?style=flat-square&logo=springboot&logoColor=white"/>
+<img style="margin:5px; border: 2px solid white; border-radius: 20px" src="https://img.shields.io/badge/Axios-navy?style=flat-square&logo=axios&logoColor=white"/>
+<img style="margin:5px; border: 2px solid white; border-radius: 20px" src="https://img.shields.io/badge/AWS-232f3e?style=flat-square&logo=amazon&logoColor=white"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</div>
+<br><br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🤟🏻 주요 기능
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `yarn eject`
+### `로그인 / 회원가입`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 로그인 기능
+- 회원가입 기능
+- 로그아웃 기능
+- 로그인 연장 기능
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `메인 페이지`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 게시글 전체 조회하기
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### `게시글 CRUD`
 
-## Learn More
+- 전체 게시글 조회하기
+- 특정 게시글 조회하기
+- [마크다운] 게시글 등록하기
+- [마크다운] 게시글 수정하기
+- 게시글 삭제하기
+- 이미지 첨부 기능
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `댓글 CRUD`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 댓글 조회
+- 댓글 등록
+- 댓글 수정
+- 댓글 삭제
 
-### Code Splitting
+### `좋아요 기능`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [게시글] 좋아요 개수 조회
+- [특정 게시글] 좋아요 기능 구현
 
-### Analyzing the Bundle Size
+### `검색 기능`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- 입력값에 따라 게시글 검색
+- 검색 결과에 따라 필터링된 게시글 조회
 
-### Making a Progressive Web App
+### `내 벨로그`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [내 벨로그] 사용자가 쓴 게시글 조회
+- [내 벨로그] 태그에 따라 특정 게시글 조회
 
-### Advanced Configuration
+<br><br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🏃🏻 프로젝트 시작하기
 
-### Deployment
+### clone repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```shell
+$ git clone https://github.com/innovation-clonecoding/Frontend.git
+```
 
-### `yarn build` fails to minify
+### install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```shell
+$ yarn install
+```
+
+### react start
+
+```shell
+$ yarn start
+```

@@ -4,8 +4,26 @@ import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import axios from "axios";
 import { userApis } from "api/userApi";
+import { useNavigate } from "react-router-dom";
+import useToken from "hooks/useToken";
+import useDecodeToken from "hooks/useDecodeToken";
+import { useEffect } from "react";
 
 const WritePage = () => {
+  const token = useToken()
+  const nickname = useDecodeToken(token)
+  const [detail, setDetail] = useState(null)
+  console.log(nickname)
+  const getData = async () => {
+    await axios.get(`http://15.164.163.50:8080/member/mypage/${nickname}`).then((res) => {
+    console.log(detail)  
+    setDetail(res.data.data);
+    });
+  };
+useEffect(()=>{
+  getData()
+},[])
+  const navigate = useNavigate()
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState('')
   const [image, setImage] = useState([])
@@ -24,6 +42,7 @@ const WritePage = () => {
     // }).catch((err)=>{
     //   console.log(err)
     // });
+    navigate(-1)
   };
 
 return (
