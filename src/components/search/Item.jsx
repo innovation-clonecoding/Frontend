@@ -12,13 +12,7 @@ import {
   Icon,
 } from "../myvelog/styles";
 
-import {
-  SearchItem,
-  UserInfoContainer,
-  UserInfoImg,
-  UserName,
-  CountPost,
-} from "./styles";
+import { UserInfoContainer, UserInfoImg, UserName, CountPost } from "./styles";
 
 function Item({ searchData }) {
   console.log("searchdata", searchData);
@@ -35,14 +29,15 @@ function Item({ searchData }) {
 
   return (
     <>
+      <CountPost>총 {count}개의 포스트를 찾았습니다.</CountPost>
       {allSearchData.map((item) => {
-        return <ItemConponent key={item.postId} item={item} count={count} />;
+        return <ItemConponent key={item.postId} item={item} />;
       })}
     </>
   );
 }
 
-function ItemConponent({ item, count }) {
+function ItemConponent({ item }) {
   const {
     postId,
     nickname,
@@ -56,7 +51,6 @@ function ItemConponent({ item, count }) {
 
   return (
     <div>
-      <CountPost>총 {count}개의 포스트를 찾았습니다.</CountPost>
       <UserInfoContainer>
         {imgUrl === "" ? (
           <UserInfoImg src={`${process.env.PUBLIC_URL}/assets/user.png`} />
