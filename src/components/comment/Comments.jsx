@@ -28,7 +28,11 @@ function Comments({ commentList, postId }) {
 			.then(alert("댓글이 수정되었습니다."));
 	};
 
-	const deleteComment = () => {};
+	const deleteComment = (commentId) => {
+		apis
+			.deleteComment(commentId)
+			.then((res) => console.log(res), alert("댓글이 삭제되었습니다."));
+	};
 
 	return (
 		<div className="flex items-center justify-center">
@@ -82,7 +86,14 @@ function Comments({ commentList, postId }) {
 												>
 													수정
 												</span>
-												<span className="text-sm text-gray-400">삭제</span>
+												<span
+													className="text-sm text-gray-400"
+													onClick={() => {
+														deleteComment(comment.commentId);
+													}}
+												>
+													삭제
+												</span>
 											</div>
 										) : null}
 									</div>

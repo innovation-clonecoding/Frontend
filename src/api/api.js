@@ -108,10 +108,8 @@ export const apis = {
 			postId: postId,
 			content: content,
 		}),
-	deleteComment: (postId, content, commentId) =>
+	deleteComment: (commentId) =>
 		api.delete(`/auth/comment/${commentId}`, {
 			PathVariable: commentId,
-			postId: postId,
-			content: content,
 		}),
 };
