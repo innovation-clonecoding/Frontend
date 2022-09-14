@@ -29,18 +29,18 @@ api.interceptors.response.use(
   async function (err) {
     const originalConfig = err.config;
     if (err.response && err.response.data.status === "403 FORBIDDEN") {
-      if (!isTokenRefresh) {
-        isTokenRefresh = true;
-        try {
-          const refreshToken = await getCookie("refresh_token");
-          axios.defaults.headers.common["refresh-token"] = refreshToken;
-          refreshAccessToken();
-          return api.request(originalConfig);
-        } catch (err) {
-          console.log("error다", err.response);
-          window.location.href = "/";
-        }
+      // if (!isTokenRefresh) {
+      // isTokenRefresh = true;
+      try {
+        const refreshToken = await getCookie("refresh_token");
+        axios.defaults.headers.common["refresh-token"] = refreshToken;
+        refreshAccessToken();
+        // return api.request(originalConfig);
+      } catch (err) {
+        console.log("error다", err.response);
+        window.location.href = "/";
       }
+      // }
       return Promise.reject(err);
     }
     return Promise.reject(err);
@@ -87,6 +87,15 @@ export const userApis = {
       return error.response;
     }
   },
+  likes: async (data) => {
+    try {
+      const response = await api.post("/auth/likes", data);
+      console.log("response", response);
+      return response.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
   kakaoLogin: (code) => {
     /* 토큰이 없을 경우 -> 즉 소셜 로그인 처음하는 회원 */
     // 백엔드 주소 뒤에 인가코드 붙여서 보내야 함
@@ -126,7 +135,8 @@ editPost: async (postId, data)=>{
 const refreshAccessToken = async () => {
   const response = await axios.post("http://15.164.163.50:8080/member/reissue");
   const access_token = response.headers["authorization"];
-  setCookie("access_token", access_token);
+  setCookie("access_token", access_token); // 이전 MpXU
+  console.log("완료!!!!!!");
   window.location.reload();
 };
 
