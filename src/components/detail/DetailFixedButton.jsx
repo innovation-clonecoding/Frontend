@@ -2,14 +2,32 @@ import React from 'react';
 import styled from 'styled-components';
 import {BsShareFill} from 'react-icons/bs'
 import {FaHeart} from 'react-icons/fa'
+import { useState } from 'react';
 
 const DetailFixedButton = ({likesNum}) => {
+
+  const [alert, setAlert] = useState(false)
+
+  const copyLink = (e) => {
+    const like = window.location.href
+    console.log(like)
+    // e.clipboardData.setData("text", like)
+    navigator.clipboard.writeText(like)
+    setAlert(true)
+    setTimeout(()=>{
+      setAlert(false)
+    },2500)
+  }
+
+
   return (
+    <>
+      {alert&&<StyledAlert>링크가 복사되었습니다.</StyledAlert>}
     <StyledDiv>
       <StyledIcon><FaHeart/></StyledIcon>
       <StyledLikeNum>{likesNum}</StyledLikeNum>
-      <StyledIcon><BsShareFill/></StyledIcon>
-    </StyledDiv>
+      <StyledIcon><BsShareFill onClick={(e)=>{copyLink(e)}}/></StyledIcon>
+    </StyledDiv></>
   );
 };
 
@@ -55,4 +73,16 @@ const StyledLikeNum = styled.div`
   margin-bottom: 1rem;
   font-weight: bold;
   color: #51575D;
+`
+const StyledAlert = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  height: 80px;
+  color: white;
+  background-color: #05BC0C;
 `
