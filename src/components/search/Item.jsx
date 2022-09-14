@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { __getSearchData } from "redux/modules/search";
 import {
   ContentsBox,
@@ -15,7 +16,6 @@ import {
 import { UserInfoContainer, UserInfoImg, UserName, CountPost } from "./styles";
 
 function Item({ searchData }) {
-  console.log("searchdata", searchData);
   const dispatch = useDispatch();
   const [allSearchData, setAllSearchData] = useState([]);
 
@@ -49,19 +49,25 @@ function ItemConponent({ item }) {
     date,
   } = item;
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <UserInfoContainer>
-        {imgUrl === "" ? (
-          <UserInfoImg src={`${process.env.PUBLIC_URL}/assets/user.png`} />
-        ) : (
-          <UserInfoImg src={imgUrl} />
-        )}
+        {/* 이미지 데이터 기본으로 유지  */}
+        <UserInfoImg src={`${process.env.PUBLIC_URL}/assets/user.png`} />
         <UserName>{nickname}</UserName>
       </UserInfoContainer>
       <ContentsBox>
         {/* [내 벨로그] 게시글 이미지 */}
-        <a style={{ color: "inherit", textDecoration: "none" }}>
+        <a
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate(`/detail/${postId}`)}
+        >
           <div
             style={{
               paddingTop: "52.356%",
@@ -74,7 +80,14 @@ function ItemConponent({ item }) {
           </div>
         </a>
         {/* [내 벨로그] 게시글 타이틀 */}
-        <a style={{ color: "inherit", textDecoration: "none" }}>
+        <a
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate(`/detail/${postId}`)}
+        >
           {" "}
           <H2>{title}</H2>
         </a>

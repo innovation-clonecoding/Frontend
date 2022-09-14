@@ -90,7 +90,6 @@ export const userApis = {
   likes: async (data) => {
     try {
       const response = await api.post("/auth/likes", data);
-      console.log("response", response);
       return response.data;
     } catch (error) {
       return error.response;
@@ -114,22 +113,30 @@ export const userApis = {
         console.log("error", error.response.msg);
       });
   },
-  newPost: async (data) => {
-    await api.post("/auth/post", data)
-    .then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
+  getPostDetail: async (postId) => {
+    const response = await api.get(`http://15.164.163.50:8080/post/${postId}`);
+    return response.data;
   },
-editPost: async (postId, data)=>{
-  await api.patch(`/auth/post/${postId}`, data)
-  .then((res)=>{
-    console.log(res)
-  }).catch((err=>{
-    console.log(err)
-  }))
-}
+  newPost: async (data) => {
+    await api
+      .post("/auth/post", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  editPost: async (postId, data) => {
+    await api
+      .patch(`/auth/post/${postId}`, data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 const refreshAccessToken = async () => {
@@ -149,4 +156,3 @@ const onLoginSuccess = (authorization, refreshToken) => {
   // axios.defaults.headers.common["authorization"] = authorization;
   // axios.defaults.headers.common["refresh-token"] = refreshToken;
 };
-
