@@ -24,12 +24,8 @@ const WritePage = () => {
       console.log(err)
     });
   };
-  const updateMarkdown = () => {
-    let updateImg = [...image]
-    setMarkdown(updateImg)
-  }
- 
-  return (
+
+return (
     <StyledDiv>
       <Write
         setMarkdown={setMarkdown}

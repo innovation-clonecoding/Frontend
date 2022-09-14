@@ -1,10 +1,15 @@
-import React from "react";
-import { useState } from "react";
+import React, { forwardRef } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 
-const WriteTextArea = ({ image, onChange }) => {
-  const [insertImage, setInsertImage] = useState([]);
+const WriteTextArea = ({
+  image,
+  onChange,
+  header,
+  setHeader,
+  textStyle,
+  setTextStyle,
+}) => {
 
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
@@ -16,10 +21,16 @@ const WriteTextArea = ({ image, onChange }) => {
     }
   };
   useEffect(() => {
-    if(image) {
+    if (image) {
       insertImg();
     }
-  },[image]);
+    if (header) {
+      insertHeader();
+    }
+    if (textStyle) {
+      insertTextStyle();
+    }
+  }, [image, header,textStyle]);
 
   const textArea = document.querySelector(".autoResize");
 
@@ -33,8 +44,66 @@ const WriteTextArea = ({ image, onChange }) => {
       textValue.length
     );
     const addImg = image[image.length - 1];
-    if(image.length>0){textArea.value = beforeCursor + "![](" + addImg + ")" + afterCursor}
+    if (image.length > 0) {
+      textArea.value = beforeCursor + "![](" + addImg + ")" + afterCursor;
+    }
     textArea.focus();
+  };
+  const insertHeader = () => {
+    const textArea = document.querySelector(".autoResize");
+    let textValue = textArea.value;
+    let cursorPosition = textArea.selectionStart;
+    const beforeCursor = textValue.substring(0, cursorPosition);
+    const arr = [...beforeCursor];
+    const currentRow = arr.lastIndexOf("\n") + 1;
+    const rowLength = cursorPosition - currentRow;
+    const beforeRow = textValue.substring(0, cursorPosition - rowLength);
+    const rowText = textValue.substring(currentRow);
+    const afterCursor = textValue.substring(
+      textArea.selectionEnd,
+      textValue.length
+    );
+    textArea.focus();
+    textArea.value = beforeRow + header + rowText + afterCursor;
+    setHeader("");
+  };
+
+  const insertTextStyle = () => {
+    const textArea = document.querySelector(".autoResize");
+    let textValue = textArea.value;
+    let cursorStartPosition = textArea.selectionStart;
+    let cursorEndPosition = textArea.selectionEnd;
+    const beforeCursor = textValue.substring(0, cursorStartPosition);
+    const selectedCursor = textValue.substring(
+      cursorStartPosition,
+      cursorEndPosition
+    );
+    const afterCursor = textValue.substring(
+      textArea.selectionEnd,
+      textValue.length
+    );
+    const text = "텍스트";
+    textArea.focus();
+    if (selectedCursor === "") {
+      textArea.value =
+        beforeCursor + textStyle + text + textStyle + afterCursor;
+    } else if (textStyle === "```") {
+      textArea.value =
+        beforeCursor +
+        textStyle +
+        "\n" +
+        selectedCursor +
+        "\n" +
+        textStyle +
+        afterCursor;
+    } else if (textStyle === "```" && selectedCursor === "") {
+      textArea.value =
+        beforeCursor + textStyle + "\n" + text + "\n" + textStyle + afterCursor;
+    } else {
+      textArea.value =
+        beforeCursor + textStyle + selectedCursor + textStyle + afterCursor;
+    }
+    setTextStyle("");
   };
   return (
     <>
