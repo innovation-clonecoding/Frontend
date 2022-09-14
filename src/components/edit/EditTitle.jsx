@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import EditToolBox from "./EditToolBox";
 
-const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle }) => {
+const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle, title, tag}) => {
+  console.log(tag)
+  console.log(title)
   const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState(tag);
 
   const onKeyPress = (e) => {
     if (e.target.value !== "" && e.key === "Enter") {
@@ -35,7 +37,7 @@ const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle }) => {
         <StyledTitleInput
           placeholder="제목을 입력하세요"
           onChange={(e) => setTitle(e.target.value)}
-          defaultValue={"기존 제목이 이곳에 들어갑니다"}
+          defaultValue={title}
         />
       </div>
       <hr
@@ -48,7 +50,7 @@ const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle }) => {
         }}
       />
       <div className="elements">
-        {tagList.map((tagItem, idx) => {
+        {tagList?.map((tagItem, idx) => {
           return (
             <TagItem key={idx}>
               <Tag onClick={deleteTag}>{tagItem}</Tag>

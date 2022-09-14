@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const EditTextArea = ({
-  value,
+  content,
   image,
   onChange,
   header,
@@ -118,7 +118,7 @@ const EditTextArea = ({
       placeholder="당신의 이야기를 적어보세요..."
       onKeyUp={autoTextAreaReize}
       onKeyDown={autoTextAreaReize}
-      defaultValue={value}
+      defaultValue={content}
       onChange={onChange}
     ></StyledTextArea>
   );

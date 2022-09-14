@@ -22,7 +22,6 @@ const DetailPage = () => {
 			setDetail(res);
 		});
 	};
-	console.log(detail?.data.data)
 	const post = detail?.data.data
 	useEffect(() => {
 		getData();

@@ -11,15 +11,14 @@ const Edit = (props) => {
   const [header, setHeader] = useState('')
   const [textStyle, setTextStyle] = useState('')
   
-const value = "게시글 내용"
   return (
     <StyledDiv>
       <StyledInnerDiv>
         <div>
-          <EditTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag} setHeader={setHeader} setTextStyle={setTextStyle}/>
+          <EditTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag} setHeader={setHeader} setTextStyle={setTextStyle} title={props.title} tag={props.tag}/>
         </div>
         <div>
-          <EditTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image} header={header} setHeader={setHeader} setTextStyle={setTextStyle} textStyle={textStyle} value={value}/>
+          <EditTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image} header={header} setHeader={setHeader} setTextStyle={setTextStyle} textStyle={textStyle} content={props.content}/>
         </div>
       </StyledInnerDiv>
       <div>
