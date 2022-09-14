@@ -127,9 +127,9 @@ export const userApis = {
         console.log(err);
       });
   },
-  editPost: async (postId, data) => {
+  editPost: async (data, postId) => {
     await api
-      .patch(`/auth/post/${postId}`, data)
+      .put(`/auth/post/${postId}`, data)
       .then((res) => {
         console.log(res);
       })
