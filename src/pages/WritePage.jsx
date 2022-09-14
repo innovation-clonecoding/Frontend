@@ -3,6 +3,7 @@ import Write from "../components/write/Write";
 import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import axios from "axios";
+import { userApis } from "api/userApi";
 
 const WritePage = () => {
   const [markdown, setMarkdown] = useState("");
@@ -17,11 +18,12 @@ const WritePage = () => {
       imgUrl: image,
       tag: tag
     };
-    await axios.post("http://15.164.163.50:8080/auth/post", data).then((res) => {
-      console.log(res);
-    }).catch((err)=>{
-      console.log(err)
-    });
+    userApis.newPost(data)
+    // await axios.post("http://15.164.163.50:8080/auth/post", data).then((res) => {
+    //   console.log(res);
+    // }).catch((err)=>{
+    //   console.log(err)
+    // });
   };
 
 return (

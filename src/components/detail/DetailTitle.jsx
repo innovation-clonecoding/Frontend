@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import DetailTags from "./DetailTags";
+import useToken from "hooks/useToken";
+import { useNavigate, useParams } from "react-router-dom";
+
 
 const DetailTitle = ({title, nickname, date, tag}) => {
+  const {postId} = useParams()
+  const navigate = useNavigate();
+  const token = useToken();
+
   //로그인 상태에 따른 버튼 변화
-  const [isAuthorized, setIsAuthorized] = useState(true);
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>
@@ -14,10 +20,9 @@ const DetailTitle = ({title, nickname, date, tag}) => {
           <div>·</div>
           <StyledNameDate margin="auto 10px">{date}</StyledNameDate>
         </StyledNameDateDiv>
-        {isAuthorized ? (
+        {token ? (
           <div>
-            <StyledLikeButton>통계</StyledLikeButton>
-            <StyledLikeButton>수정</StyledLikeButton>
+            <StyledLikeButton onClick={()=>{navigate(`/edit/${postId}`)}}>수정</StyledLikeButton>
             <StyledLikeButton>삭제</StyledLikeButton>
           </div>
         ) : null}

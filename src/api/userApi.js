@@ -114,6 +114,22 @@ export const userApis = {
         console.log("error", error.response.msg);
       });
   },
+  newPost: async (data) => {
+    await api.post("/auth/post", data)
+    .then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+editPost: async (postId, data)=>{
+  await api.patch(`/auth/post/${postId}`, data)
+  .then((res)=>{
+    console.log(res)
+  }).catch((err=>{
+    console.log(err)
+  }))
+}
 };
 
 const refreshAccessToken = async () => {
@@ -133,3 +149,4 @@ const onLoginSuccess = (authorization, refreshToken) => {
   // axios.defaults.headers.common["authorization"] = authorization;
   // axios.defaults.headers.common["refresh-token"] = refreshToken;
 };
+

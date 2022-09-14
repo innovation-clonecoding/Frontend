@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Edit from '../components/edit/Edit';
 import EditShow from '../components/edit/EditShow';
 import styled from 'styled-components';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { userApis } from 'api/userApi';
 
 const EditPage = () => {
+	const [detail, setDetail] = useState(null);
+  const getData = async () => {
+		await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
+			setDetail(res);
+		});
+	};
+  const post = detail?.data.data
+  console.log(post)
+	useEffect(() => {
+		getData();
+	}, []);
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState('')
   const [image, setImage] = useState([])
@@ -20,13 +32,13 @@ const EditPage = () => {
       imgUrl: image,
       tag: tag
     };
-    await axios.patch(`http://15.164.163.50:8080/auth/post/${postId}`, data).then((res) => {
-      console.log(res);
-    }).catch((err)=>{
-      console.log(err)
-    });
+    userApis.editPost(data, postId)
+    // await axios.patch(`http://15.164.163.50:8080/auth/post/${postId}`, data).then((res) => {
+    //   console.log(res);
+    // }).catch((err)=>{
+    //   console.log(err)
+    // });
   };
-
   return (
     <StyledDiv>
       <Edit 
@@ -36,6 +48,7 @@ const EditPage = () => {
         setImage={setImage}
         setTag={setTag}
         image={image}
+        {...post}
       />
       <EditShow markdown={markdown}/>
     </StyledDiv>
