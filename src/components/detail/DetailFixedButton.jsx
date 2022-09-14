@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BsShareFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
-import { userApis } from "api/userApi";
+import { __getLikes } from "redux/modules/likes";
 
-const DetailFixedButton = ({ likesNum, postId }) => {
+const DetailFixedButton = ({ like, onLikesClick }) => {
   const [alert, setAlert] = useState(false);
-  const [like, setLike] = useState(likesNum);
-  const [isLike, setIsLike] = useState(false);
+  const isLike = localStorage.getItem("isLike");
 
   const copyLink = (e) => {
     const like = window.location.href;
@@ -21,22 +20,6 @@ const DetailFixedButton = ({ likesNum, postId }) => {
     }, 2500);
   };
 
-  const onLikesClick = () => {
-    const data = {
-      postId: postId, // postId 가져와서 넣기
-    };
-    userApis.likes(data).then((res) => {
-      const str = String(res.msg);
-      if (str.includes("완료") === true) {
-        setLike(like + 1);
-        setIsLike(true);
-      } else {
-        setLike(like - 1);
-        setIsLike(false);
-      }
-    });
-  };
-
   return (
     <>
       {alert && <StyledAlert>링크가 복사되었습니다.</StyledAlert>}
@@ -44,7 +27,7 @@ const DetailFixedButton = ({ likesNum, postId }) => {
         <StyledIcon>
           <FaHeart
             onClick={() => onLikesClick()}
-            color={isLike ? "green" : null}
+            color={isLike === "true" ? "green" : null}
           />
         </StyledIcon>
         <StyledLikeNum>{like}</StyledLikeNum>
