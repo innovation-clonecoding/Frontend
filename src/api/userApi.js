@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "utils/Cookie";
 
-const JWT_EXPIRY_TIME = 24 * 3600 * 1000;
 const access_token = getCookie("access_token");
 const refresh_token = getCookie("refresh_token");
 
@@ -14,11 +13,39 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// 사용할 부분만 interceptors를 사용하면 됨
 api.interceptors.request.use(function (config) {
   config.headers.common["Authorization"] = access_token;
   config.headers.common["Refresh-Token"] = refresh_token;
   return config;
 });
+
+let isTokenRefresh = false;
+
+api.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (err) {
+    const originalConfig = err.config;
+    if (err.response && err.response.data.status === "403 FORBIDDEN") {
+      if (!isTokenRefresh) {
+        isTokenRefresh = true;
+        try {
+          const refreshToken = await getCookie("refresh_token");
+          axios.defaults.headers.common["refresh-token"] = refreshToken;
+          refreshAccessToken();
+          return api.request(originalConfig);
+        } catch (err) {
+          console.log("error다", err.response);
+          window.location.href = "/";
+        }
+      }
+      return Promise.reject(err);
+    }
+    return Promise.reject(err);
+  }
+);
 
 export const userApis = {
   // member
@@ -54,34 +81,45 @@ export const userApis = {
   },
   getUserInfo: async () => {
     try {
-      const { data } = api.get("/auth/member/profile-info");
-      return data;
+      const response = await api.get("/auth/member/profile-info");
+      return response.data;
     } catch (error) {
       return error.response;
     }
   },
+  kakaoLogin: (code) => {
+    /* 토큰이 없을 경우 -> 즉 소셜 로그인 처음하는 회원 */
+    // 백엔드 주소 뒤에 인가코드 붙여서 보내야 함
+    console.log("code2", code);
+    axios
+      .get(`http://15.164.163.50:8080/member/login/kakao?code=${code}`)
+      .then((res) => {
+        const access_token = res.headers["authorization"];
+        // token을 쿠키 or 로컬 스토리지에 토큰 담기
+        // 저장된 토큰 가져오기
+        // 백엔드로 해당 토큰 header에 담아서 요청하기
+        // 응답을 받으면 로컬에 유저 정보 저장
+        // 유저 정보를 잘 받아왔으면 홈으로 이동시킴
+      })
+      .catch((error) => {
+        console.log("error", error.response.msg);
+      });
+  },
 };
 
-export const silentRefresh = () => {
-  // console.log("access2", access_token);
-  api
-    .post("member/reissue")
-    .then((res) => onLoginSuccess(res.headers["authorization"], refresh_token))
-    .catch((error) => {
-      console.log("err", error.response.data);
-    });
+const refreshAccessToken = async () => {
+  const response = await axios.post("http://15.164.163.50:8080/member/reissue");
+  const access_token = response.headers["authorization"];
+  setCookie("access_token", access_token);
+  window.location.reload();
 };
 
 const onLoginSuccess = (authorization, refreshToken) => {
   // console.log("access1", authorization);
-  // console.log("refresh", refreshToken); // 8YcI
 
   setCookie("access_token", authorization);
   setCookie("refresh_token", refreshToken);
 
-  axios.defaults.headers.common["authorization"] = authorization;
-  axios.defaults.headers.common["refresh-token"] = refreshToken;
-
-  // accessToken 만료하기 1분 전에 로그인 연장
-  setTimeout(silentRefresh, JWT_EXPIRY_TIME - 60000);
+  // axios.defaults.headers.common["authorization"] = authorization;
+  // axios.defaults.headers.common["refresh-token"] = refreshToken;
 };

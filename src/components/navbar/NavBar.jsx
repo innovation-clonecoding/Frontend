@@ -13,8 +13,7 @@ function NavBar() {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const [isModal, ModalHandler] = useChange();
   const token = useToken();
-  const userInfo = useDecodeToken(token);
-  const nickName = userInfo[1];
+  const nickName = useDecodeToken(token);
 
   const onLogout = () => {
     userApis.logout().then((res) => {

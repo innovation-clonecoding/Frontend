@@ -15,12 +15,24 @@ function UserInfo() {
   const [introduction, setIntroduction] = useState();
 
   useEffect(() => {
-    // userApis.getUserInfo().then((res) => console.log("res", res));
+    userApis.getUserInfo().then((res) => {
+      setImgUrl(res.data.imgUrl);
+      setNickName(res.data.nickname);
+      setIntroduction(res.data.introduction);
+    });
   });
+
+  console.log("introduction", introduction);
   return (
     <Container>
       <UserInfoContainer>
-        <Image src="http://file3.instiz.net/data/file3/2018/03/15/a/9/9/a999fc50792aefcc8fc2a550bd52f82d.jpg" />
+        <>
+          {imgUrl ? (
+            <Image src={imgUrl} />
+          ) : (
+            <Image src={`${process.env.PUBLIC_URL}/assets/user.png`} />
+          )}
+        </>
         <Description>
           <UserNicknName>{nickName}</UserNicknName>
           <Introduction>{introduction}</Introduction>
