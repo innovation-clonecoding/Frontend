@@ -30,12 +30,7 @@ function NavBar() {
         <div className="flex">
           <h1 className="flex-grow ml-20 font-bold text-[30px] mt-2">velog</h1>
           <div className="flex gap-4 mr-20">
-            <button>
-              <FiSearch
-                className="w-6 h-6"
-                onClick={() => navigate("/search")}
-              />
-            </button>
+            <button>onClick={() => navigate("/search")}</button>
             {!token ? (
               <>
                 <button
