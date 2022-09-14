@@ -28,8 +28,7 @@ const WritePage = () => {
     let updateImg = [...image]
     setMarkdown(updateImg)
   }
-  useEffect(()=>{
-  },[])
+ 
   return (
     <StyledDiv>
       <Write

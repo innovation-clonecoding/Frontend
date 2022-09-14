@@ -21,7 +21,7 @@ const DetailRecommend = () => {
 export default DetailRecommend;
 
 const StyledDiv = styled.div`
-	// margin: 5rem 0;
+	margin: 5rem 0;
 `;
 
 const StyledTitle = styled.h4`
