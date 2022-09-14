@@ -3,18 +3,24 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import WriteToolBox from "./WriteToolBox";
 
-const WriteTitle = ({setTitle, setImage, setTag}) => {
+const WriteTitle = ({
+  setTitle,
+  setImage,
+  setTag,
+  setHeader,
+  setTextStyle,
+}) => {
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
-  
+
   const onKeyPress = (e) => {
     if (e.target.value !== "" && e.key === "Enter") {
       submitTag();
     }
   };
-  useEffect(()=>{
-    setTag(tagList)
-  })
+  useEffect(() => {
+    setTag(tagList);
+  });
   const submitTag = () => {
     let updatedTagList = [...tagList];
     if (!tagList.includes(tagItem)) {
@@ -24,7 +30,6 @@ const WriteTitle = ({setTitle, setImage, setTag}) => {
     const tagInput = document.querySelector("#tagInput");
     tagInput.value = null;
   };
-  const handleChange = () => {};
   const deleteTag = (e) => {
     const deleteItem = e.target.parentElement.firstChild.innerText;
     const filterTag = tagList.filter((tagItem) => tagItem !== deleteItem);
@@ -63,7 +68,7 @@ const WriteTitle = ({setTitle, setImage, setTag}) => {
         />
       </div>
       <div className="elements">
-        <WriteToolBox setImage={setImage}/>
+        <WriteToolBox setImage={setImage} setHeader={setHeader} setTextStyle={setTextStyle} />
       </div>
     </StyledDiv>
   );

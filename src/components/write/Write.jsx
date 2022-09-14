@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import WriteFooter from "./WriteFooter";
 import WriteTextArea from "./WriteTextArea";
@@ -7,15 +8,17 @@ const Write = (props) => {
   const handleChange = (e) => {
     props.setMarkdown(e.target.value)
   }
-
+  const [header, setHeader] = useState('')
+  const [textStyle, setTextStyle] = useState('')
+  
   return (
     <StyledDiv>
       <StyledInnerDiv>
         <div>
-          <WriteTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag}/>
+          <WriteTitle setTitle={props.setTitle} setImage={props.setImage} setTag={props.setTag} setHeader={setHeader} setTextStyle={setTextStyle}/>
         </div>
         <div>
-          <WriteTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image}/>
+          <WriteTextArea onChange={handleChange} setContent={props.setContent} setImage={props.setImage} image={props.image} header={header} setHeader={setHeader} setTextStyle={setTextStyle} textStyle={textStyle}/>
         </div>
       </StyledInnerDiv>
       <div>
