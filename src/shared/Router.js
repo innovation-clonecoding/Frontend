@@ -20,8 +20,8 @@ const Router = () => {
         {/* 모달 테스트 페이지 */}
         <Route path="/test" element={<LoginTestPage />} />
         <Route path="/write" element={<WritePage />} />
-        <Route path="/edit" element={<EditPage />} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/edit/:postId" element={<EditPage />} />
+        <Route path="/detail/:postId" element={<DetailPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/setting" element={<SettingPage />} />
