@@ -7,6 +7,7 @@ import styled from "styled-components";
 import React from "react";
 import NavBar from "components/navbar/NavBar";
 import DetailFixedButton from "components/detail/DetailFixedButton";
+import Comments from "components/comment/Comments";
 // import Comments from "components/comment/Comments";
 import { useEffect } from "react";
 import axios from "axios";
@@ -39,6 +40,7 @@ const DetailPage = () => {
 					{/* <DetailComment {...posted}/> */}
 				</StyledInnerDiv>
 			</StyledDiv>
+			<Comments />
 		</>
 	);
 };
