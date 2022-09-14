@@ -1,23 +1,34 @@
 import { apis } from "api/api";
+import { userApis } from "api/userApi";
+import useInput from "hooks/useInput";
 import React, { useState, useEffect } from "react";
 
 function Comments({ commentList, postId }) {
-	const [comment, setComment] = useState("");
+	const [nickname, setNickName] = useState();
+	const [selectComment, setSelectComment] = useState();
+	const [onEdit, setOnEdit] = useState(false);
+
+	const comment = useInput("");
+	const editInput = useInput("");
+
+	useEffect(() => {
+		userApis.getUserInfo().then((res) => setNickName(res.data.nickname));
+	}, []);
 
 	const addComment = () => {
 		apis
-			.postComment(postId, comment)
-			.then(setComment(""))
+			.postComment(postId, comment.value)
+			.then(comment.setValue(""))
 			.then(alert("댓글이 작성되었습니다."));
 	};
-
-	const editComment = () => {};
+	const editComment = (commentId) => {
+		apis
+			.editComment(postId, editInput.value, commentId)
+			.then((res) => console.log(res))
+			.then(alert("댓글이 수정되었습니다."));
+	};
 
 	const deleteComment = () => {};
-
-	const onChangeComment = (event) => {
-		setComment(event.target.value);
-	};
 
 	return (
 		<div className="flex items-center justify-center">
@@ -28,8 +39,8 @@ function Comments({ commentList, postId }) {
 				<input
 					className="p-4 pb-16 border-2 border-gray-100 rounded-lg h-28"
 					placeholder="댓글을 작성하세요"
-					value={comment}
-					onChange={onChangeComment}
+					value={comment.value}
+					onChange={comment.changeHandler}
 				/>
 				<div className="mr-10 text-right mt-7">
 					<button
@@ -60,14 +71,45 @@ function Comments({ commentList, postId }) {
 												{comment.date}
 											</div>
 										</div>
-										<div className="ml-auto">
-											<span className="m-2 text-sm text-gray-400">수정</span>
-											<span className="text-sm text-gray-400">삭제</span>
+										{nickname == comment.nickname ? (
+											<div className="ml-auto">
+												<span
+													className="m-2 text-sm text-gray-400"
+													onClick={() => {
+														setOnEdit(!onEdit);
+														setSelectComment(comment.commentId);
+													}}
+												>
+													수정
+												</span>
+												<span className="text-sm text-gray-400">삭제</span>
+											</div>
+										) : null}
+									</div>
+									{onEdit && comment.commentId === selectComment ? (
+										<>
+											<input
+												className="p-4 pb-16 border-2 border-gray-100 rounded-lg h-28"
+												placeholder="댓글을 작성하세요"
+												value={editInput.value}
+												onChange={editInput.changeHandler}
+											/>
+											<div className="py-4 mr-10 text-right">
+												<button
+													className="px-5 py-1 text-white rounded-lg bg-[#12b886] hover:bg-[#20C997]"
+													onClick={() => {
+														editComment(comment.commentId);
+													}}
+												>
+													댓글 수정
+												</button>
+											</div>
+										</>
+									) : (
+										<div className="my-10" name="comment">
+											{comment.content}
 										</div>
-									</div>
-									<div className="my-10" name="comment">
-										{comment.content}
-									</div>
+									)}
 								</div>
 							</>
 						))}
