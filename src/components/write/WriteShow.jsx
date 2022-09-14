@@ -17,8 +17,8 @@ export default WriteShow;
 const StyledDiv = styled.div`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  height: 100%;
-  position: relative;
+    top:0px;
+  height: 100vh;
   background-color: #fbfdfc;
 `;
 const StyledInnerDiv = styled.div`

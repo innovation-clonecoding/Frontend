@@ -4,7 +4,7 @@ import DetailTags from "./DetailTags";
 
 const DetailTitle = ({title, nickname, date, tag}) => {
   //로그인 상태에 따른 버튼 변화
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>

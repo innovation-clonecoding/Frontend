@@ -12,17 +12,18 @@ import Comments from "components/comment/Comments";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const DetailPage = () => {
+	const {postId} = useParams()
 	const [detail, setDetail] = useState(null);
 	const getData = async () => {
-		await axios.get(`http://localhost:3001/post`).then((res) => {
+		await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
 			setDetail(res);
 		});
 	};
-	// const posted = detail.find(post=>post.postId===postId)
-	// console.log(posted)
-	const posted = detail?.data.find((post) => post.postId === 2);
+	console.log(detail?.data.data)
+	const post = detail?.data.data
 	useEffect(() => {
 		getData();
 	}, []);
@@ -30,12 +31,12 @@ const DetailPage = () => {
 		<>
 			<NavBar />
 			<StyledDiv>
-				<DetailFixedButton {...posted} />
+				<DetailFixedButton {...post} />
 				<StyledInnerDiv>
-					<DetailTitle {...posted} />
-					<DetailContent {...posted} />
-					<DetailAccount {...posted} />
-					<DetailRecommend {...posted} />
+					<DetailTitle {...post} />
+					<DetailContent {...post} />
+					<DetailAccount {...post} />
+					<DetailRecommend {...post} />
 					<Comments />
 				</StyledInnerDiv>
 			</StyledDiv>

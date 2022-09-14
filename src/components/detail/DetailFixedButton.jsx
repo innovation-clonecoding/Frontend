@@ -1,18 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BsShareFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
+import { useState } from "react";
 import { userApis } from "api/userApi";
 
 const DetailFixedButton = ({ likesNum, postId }) => {
-  //likesNum 값 받아서 useState에 반영
-  const likesNumTest = 2; // likesNum 값 받아오면 이부분 삭제 (테스트 용도)
-  const [like, setLike] = useState(likesNumTest);
+  const [alert, setAlert] = useState(false);
+  const [like, setLike] = useState(likesNum);
   const [isLike, setIsLike] = useState(false);
+
+  const copyLink = (e) => {
+    const like = window.location.href;
+    console.log(like);
+    // e.clipboardData.setData("text", like)
+    navigator.clipboard.writeText(like);
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 2500);
+  };
 
   const onLikesClick = () => {
     const data = {
-      postId: 6, // postId 가져와서 넣기
+      postId: postId, // postId 가져와서 넣기
     };
     userApis.likes(data).then((res) => {
       const str = String(res.msg);
@@ -27,18 +38,25 @@ const DetailFixedButton = ({ likesNum, postId }) => {
   };
 
   return (
-    <StyledDiv>
-      <StyledIcon>
-        <FaHeart
-          onClick={() => onLikesClick()}
-          color={isLike ? "green" : null}
-        />
-      </StyledIcon>
-      <StyledLikeNum>{like}</StyledLikeNum>
-      <StyledIcon>
-        <BsShareFill />
-      </StyledIcon>
-    </StyledDiv>
+    <>
+      {alert && <StyledAlert>링크가 복사되었습니다.</StyledAlert>}
+      <StyledDiv>
+        <StyledIcon>
+          <FaHeart
+            onClick={() => onLikesClick()}
+            color={isLike ? "green" : null}
+          />
+        </StyledIcon>
+        <StyledLikeNum>{like}</StyledLikeNum>
+        <StyledIcon>
+          <BsShareFill
+            onClick={(e) => {
+              copyLink(e);
+            }}
+          />
+        </StyledIcon>
+      </StyledDiv>
+    </>
   );
 };
 
@@ -84,4 +102,16 @@ const StyledLikeNum = styled.div`
   margin-bottom: 1rem;
   font-weight: bold;
   color: #51575d;
+`;
+const StyledAlert = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  height: 80px;
+  color: white;
+  background-color: #05bc0c;
 `;
