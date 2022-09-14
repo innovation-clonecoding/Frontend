@@ -17,7 +17,7 @@ const ChildBox = styled.div`
 `;
 
 const SearchBox = styled.div`
-  margin: 0 10rem 1.5rem 10rem;
+  /* margin: 0 2rem 1.5rem 2rem; */
   height: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -90,7 +90,7 @@ const Ptag = styled.p`
 
 const CountPost = styled.p`
   font-size: 1rem;
-  margin: 2rem 0 2rem 0rem;
+  margin: 2rem 0 3.5rem 0rem;
 `;
 
 export {
