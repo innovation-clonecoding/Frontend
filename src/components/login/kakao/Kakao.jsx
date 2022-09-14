@@ -1,4 +1,4 @@
-import { apis } from "api/api";
+import { userApis } from "api/userApi";
 import React, { useEffect } from "react";
 import {
   Main,
@@ -14,9 +14,11 @@ const Kakao = () => {
   const href = window.location.href;
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");
+  console.log("params", params);
+  console.log("code1", code);
 
   useEffect(() => {
-    apis.kakaoLogin(code);
+    userApis.kakaoLogin(code);
   }, []);
 
   return (
