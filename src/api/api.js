@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "http://localhost:3001/",
+	baseURL: "http://15.164.163.50:8080/",
 	headers: {
 		"content-type": "application/json;charset=UTF-8",
 		accept: "application/json,",
@@ -50,7 +50,7 @@ export const apis = {
 			});
 	},
 	// Post
-	getPost: () => api.get("post"),
+	getPost: () => api.get("recent"),
 
 	// Comment
 	getComment: () => api.get("comment"),

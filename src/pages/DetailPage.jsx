@@ -38,7 +38,7 @@ const DetailPage = () => {
 					<DetailContent {...post} />
 					<DetailAccount {...post} />
 					<DetailRecommend {...post} />
-					<Comments commentList={post?.commentsList} />
+					<Comments commentList={post?.commentsList} {...post} />
 				</StyledInnerDiv>
 			</StyledDiv>
 		</>

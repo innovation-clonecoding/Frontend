@@ -1,8 +1,11 @@
 import { apis } from "api/api";
 import NavBar from "components/navbar/NavBar";
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useNavigate } from "react-router";
 
 function MainPage() {
+	const navigate = useNavigate();
+
 	const [postList, setPostList] = useState();
 	const [page, setPage] = useState(1);
 	const preventRef = useRef(true);
@@ -10,9 +13,10 @@ function MainPage() {
 	const endRef = useRef(false);
 
 	useEffect(() => {
-		apis.getPost().then((response) => setPostList(response.data));
+		apis.getPost().then((response) => setPostList(response.data.data));
 	}, []);
 
+	console.log(postList);
 	useEffect(() => {
 		const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
 		if (obsRef.current) observer.observe(obsRef.current);
@@ -21,10 +25,6 @@ function MainPage() {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	if (page !== 1) getPost();
-	// }, [page]);
-
 	const obsHandler = (entries) => {
 		const target = entries[0];
 		if (!endRef.current && target.isIntersecting && preventRef.current) {
@@ -32,7 +32,9 @@ function MainPage() {
 			setPage((prev) => prev + 1);
 		}
 	};
-
+	const test = () => {
+		console.log("hi");
+	};
 	return (
 		<>
 			<div className="relative z-0 w-full h-full bg-gray-50">
@@ -41,7 +43,13 @@ function MainPage() {
 					{postList &&
 						postList.map((post) => (
 							<>
-								<div className="relative flex flex-col m-auto bg-white border-2 shadow-xl w-80 h-96 rounded-xl hover:-translate-y-3 hover:duration-500">
+								<div
+									className="relative flex flex-col m-auto bg-white border-2 shadow-xl w-80 h-96 rounded-xl hover:-translate-y-3 hover:duration-500"
+									key={post.postId}
+									onClick={() => {
+										navigate(`detail/${post.postId}`);
+									}}
+								>
 									{post.imgUrl && (
 										<img
 											src={post.imgUrl}
