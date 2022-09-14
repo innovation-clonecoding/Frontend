@@ -15,17 +15,19 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const DetailPage = () => {
-	const {postId} = useParams()
+	const { postId } = useParams();
 	const [detail, setDetail] = useState(null);
 	const getData = async () => {
 		await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
 			setDetail(res);
 		});
 	};
-	const post = detail?.data.data
+	const post = detail?.data.data;
+	console.log(post);
 	useEffect(() => {
 		getData();
 	}, []);
+
 	return (
 		<>
 			<NavBar />
@@ -36,7 +38,7 @@ const DetailPage = () => {
 					<DetailContent {...post} />
 					<DetailAccount {...post} />
 					<DetailRecommend {...post} />
-					<Comments />
+					<Comments commentList={post?.commentsList} />
 				</StyledInnerDiv>
 			</StyledDiv>
 		</>

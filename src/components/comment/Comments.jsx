@@ -1,12 +1,12 @@
 import { apis } from "api/api";
 import React, { useState, useEffect } from "react";
 
-function Comments() {
-	const [commentList, setCommentList] = useState();
-
-	useEffect(() => {
-		apis.getComment().then((response) => setCommentList(response.data));
-	}, []);
+function Comments({ commentList }) {
+	// const [commentList, setCommentList] = useState();
+	console.log(commentList);
+	// useEffect(() => {
+	// 	apis.getComment().then((response) => setCommentList(response.data));
+	// }, []);
 	return (
 		<div className="flex items-center justify-center">
 			<div className="flex flex-col w-[780px]">
