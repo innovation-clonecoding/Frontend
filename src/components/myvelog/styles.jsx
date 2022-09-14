@@ -192,7 +192,7 @@ const SubInfo = styled.div`
   -webkit-box-align: center;
   align-items: center;
   margin-top: 1rem;
-  margin-left: 0.3rem;
+  /* margin-left: 0.1rem; */
   color: #868e96;
 `;
 
