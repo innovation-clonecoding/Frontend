@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TbH1, TbH2, TbH3, TbH4 } from "react-icons/tb";
 import { BiBold, BiItalic } from "react-icons/bi";
 import { MdFormatStrikethrough, MdCode } from "react-icons/md";
-import { IoMdQuote, IoMdLink, IoMdImage } from "react-icons/io";
+import { IoMdQuote, IoMdImage } from "react-icons/io";
 import { useState } from "react";
 import { useEffect } from "react";
 

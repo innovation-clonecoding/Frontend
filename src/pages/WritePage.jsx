@@ -3,7 +3,6 @@ import Write from "../components/write/Write";
 import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import axios from "axios";
-import { useEffect } from "react";
 
 const WritePage = () => {
   const [markdown, setMarkdown] = useState("");
@@ -36,7 +35,6 @@ return (
         image={image}
       />
       <WriteShow markdown={markdown}/>
-  
     </StyledDiv>
   );
 };

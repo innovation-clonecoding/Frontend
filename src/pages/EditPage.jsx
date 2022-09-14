@@ -4,7 +4,6 @@ import EditShow from '../components/edit/EditShow';
 import styled from 'styled-components';
 import axios from "axios";
 
-
 const EditPage = () => {
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState('')
@@ -24,10 +23,6 @@ const EditPage = () => {
       console.log(err)
     });
   };
-  const updateMarkdown = () => {
-    let updateImg = [...image]
-    setMarkdown(updateImg)
-  }
 
   return (
     <StyledDiv>

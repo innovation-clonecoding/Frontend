@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { TbH1, TbH2, TbH3, TbH4 } from "react-icons/tb";
 import { BiBold, BiItalic } from "react-icons/bi";
 import { MdFormatStrikethrough, MdCode } from "react-icons/md";
-import { IoMdQuote, IoMdLink, IoMdImage } from "react-icons/io";
-const EditToolBox = ({setImage}) => {
+import { IoMdQuote, IoMdImage } from "react-icons/io";
+
+const EditToolBox = ({setImage, setHeader, setTextStyle}) => {
   const [imageUpload, setImageUpload] = useState([])
 
   useEffect(()=>{
@@ -21,41 +22,38 @@ const EditToolBox = ({setImage}) => {
   }
   return (
     <StyledDiv>
-      <div>
-        <TbH1 />
+      <div onClick={()=>{setHeader("# ")}}>
+        <TbH1/>
       </div>
       <div>
-        <TbH2 />
+        <TbH2 onClick={()=>{setHeader("## ")}}/>
       </div>
       <div>
-        <TbH3 />
+        <TbH3 onClick={()=>{setHeader("### ")}} />
       </div>
       <div>
-        <TbH4 />
-      </div>
-      <StyledDivision>|</StyledDivision>
-      <div>
-        <BiBold />
-      </div>
-      <div>
-        <BiItalic />
-      </div>
-      <div>
-        <MdFormatStrikethrough />
+        <TbH4 onClick={()=>{setHeader("#### ")}} />
       </div>
       <StyledDivision>|</StyledDivision>
       <div>
-        <IoMdQuote />
+        <BiBold onClick={()=>{setTextStyle("**")}}/>
       </div>
       <div>
-        <IoMdLink />
+        <BiItalic onClick={()=>{setTextStyle("_")}}/>
+      </div>
+      <div>
+        <MdFormatStrikethrough onClick={()=>{setTextStyle("~~")}}/>
+      </div>
+      <StyledDivision>|</StyledDivision>
+      <div>
+        <IoMdQuote  onClick={()=>{setHeader("> ")}} />
       </div>
       <div>
         <input type='file' accept="image/jpg, image/png, image/jpeg, image/gif" ref={upLoadImg} style={{"display":"none"}} onChange={onChange}/>
         <IoMdImage onClick={openFile}/>
       </div>
       <div>
-        <MdCode />
+        <MdCode onClick={()=>{setTextStyle("```")}}/>
       </div>
     </StyledDiv>
   );

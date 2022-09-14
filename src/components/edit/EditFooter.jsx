@@ -10,9 +10,6 @@ const EditFooter = ({onSubmit}) => {
         &nbsp; 나가기
       </StyledButton>
       <StyledInnerDiv>
-        <StyledButton bg="white" color="#14B886">
-          임시저장
-        </StyledButton>
         <StyledButton hover="#21C997" onClick={onSubmit}>출간하기</StyledButton>
       </StyledInnerDiv>
     </StyledDiv>
