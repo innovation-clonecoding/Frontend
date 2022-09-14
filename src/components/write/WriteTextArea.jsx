@@ -1,26 +1,51 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-const WriteTextArea = ({value, onChange}) => {
+const WriteTextArea = ({ image, onChange }) => {
+  const [insertImage, setInsertImage] = useState([]);
+
   const autoTextAreaReize = (e) => {
     const textArea = document.querySelector(".autoResize");
 
     if (textArea) {
       textArea.style.height = "auto";
       const height = textArea.scrollHeight;
-      textArea.style.height = `${height + 8}px`;
+      textArea.style.height = `${height + 15}px`;
     }
   };
+  useEffect(() => {
+    if(image) {
+      insertImg();
+    }
+  },[image]);
 
+  const textArea = document.querySelector(".autoResize");
+
+  const insertImg = () => {
+    const textArea = document.querySelector(".autoResize");
+    let textValue = textArea.value;
+    let cursorPosition = textArea.selectionStart;
+    const beforeCursor = textValue.substring(0, cursorPosition);
+    const afterCursor = textValue.substring(
+      textArea.selectionEnd,
+      textValue.length
+    );
+    const addImg = image[image.length - 1];
+    if(image.length>0){textArea.value = beforeCursor + "![](" + addImg + ")" + afterCursor}
+    textArea.focus();
+  };
   return (
-    <StyledTextArea
-      className="autoResize"
-      placeholder="당신의 이야기를 적어보세요..."
-      onKeyUp={autoTextAreaReize}
-      onKeyDown={autoTextAreaReize}
-      value={value}
-      onChange={onChange}
-    ></StyledTextArea>
+    <>
+      <StyledTextArea
+        className="autoResize"
+        placeholder="당신의 이야기를 적어보세요..."
+        onKeyUp={autoTextAreaReize}
+        onKeyDown={autoTextAreaReize}
+        onChange={onChange}
+      ></StyledTextArea>
+    </>
   );
 };
 
