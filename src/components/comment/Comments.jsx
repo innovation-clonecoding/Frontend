@@ -1,12 +1,24 @@
 import { apis } from "api/api";
 import React, { useState, useEffect } from "react";
 
-function Comments({ commentList }) {
-	// const [commentList, setCommentList] = useState();
-	console.log(commentList);
-	// useEffect(() => {
-	// 	apis.getComment().then((response) => setCommentList(response.data));
-	// }, []);
+function Comments({ commentList, postId }) {
+	const [comment, setComment] = useState("");
+
+	const addComment = () => {
+		apis
+			.postComment(postId, comment)
+			.then(setComment(""))
+			.then(alert("댓글이 작성되었습니다."));
+	};
+
+	const editComment = () => {};
+
+	const deleteComment = () => {};
+
+	const onChangeComment = (event) => {
+		setComment(event.target.value);
+	};
+
 	return (
 		<div className="flex items-center justify-center">
 			<div className="flex flex-col w-[780px]">
@@ -16,9 +28,16 @@ function Comments({ commentList }) {
 				<input
 					className="p-4 pb-16 border-2 border-gray-100 rounded-lg h-28"
 					placeholder="댓글을 작성하세요"
+					value={comment}
+					onChange={onChangeComment}
 				/>
 				<div className="mr-10 text-right mt-7">
-					<button className="px-5 py-1 text-white rounded-lg bg-[#12b886] hover:bg-[#20C997]">
+					<button
+						className="px-5 py-1 text-white rounded-lg bg-[#12b886] hover:bg-[#20C997]"
+						onClick={() => {
+							addComment();
+						}}
+					>
 						댓글 작성
 					</button>
 				</div>
@@ -32,7 +51,7 @@ function Comments({ commentList }) {
 								>
 									<div className="flex items-center">
 										<img
-											src={comment.imgUrl}
+											src={comment.profileUrl}
 											className="text-center rounded-full w-14 h-14"
 										/>
 										<div className="ml-4">

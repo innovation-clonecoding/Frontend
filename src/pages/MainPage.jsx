@@ -32,9 +32,7 @@ function MainPage() {
 			setPage((prev) => prev + 1);
 		}
 	};
-	const test = () => {
-		console.log("hi");
-	};
+
 	return (
 		<>
 			<div className="relative z-0 w-full h-full bg-gray-50">
