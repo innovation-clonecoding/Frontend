@@ -19,15 +19,11 @@ const DetailPage = () => {
 	const [detail, setDetail] = useState(null);
 	const getData = async () => {
 		await axios.get(`http://15.164.163.50:8080/post/${postId}`).then((res) => {
-			console.log(res)
 			setDetail(res);
 		});
 	};
-	console.log(postId)
-	// const posted = detail.find(post=>post.postId===postId)
-	// console.log(posted)
-	console.log(detail)
-	const posted = detail?.data.find((post) => post.postId === 2);
+	console.log(detail?.data.data)
+	const post = detail?.data.data
 	useEffect(() => {
 		getData();
 	}, []);
@@ -35,12 +31,12 @@ const DetailPage = () => {
 		<>
 			<NavBar />
 			<StyledDiv>
-				<DetailFixedButton {...posted} />
+				<DetailFixedButton {...post} />
 				<StyledInnerDiv>
-					<DetailTitle {...posted} />
-					<DetailContent {...posted} />
-					<DetailAccount {...posted} />
-					<DetailRecommend {...posted} />
+					<DetailTitle {...post} />
+					<DetailContent {...post} />
+					<DetailAccount {...post} />
+					<DetailRecommend {...post} />
 					<Comments />
 				</StyledInnerDiv>
 			</StyledDiv>

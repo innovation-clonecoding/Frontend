@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { MdOutlineArrowBack } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const WriteFooter = ({onSubmit}) => {
+  const navigate = useNavigate()
   return (
     <StyledDiv>
-      <StyledButton color="black" bg="white" display="flex">
+      <StyledButton color="black" bg="white" display="flex" onClick={()=>{navigate(-1)}}>
         <MdOutlineArrowBack size="23px" />
         &nbsp; 나가기
       </StyledButton>
@@ -25,8 +27,8 @@ const StyledDiv = styled.div`
   width: 50vw;
   height: 80px;
   font-size: 28px;
-  position: relative;
   box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+  bottom: 0px;
 `;
 const StyledInnerDiv = styled.div`
   display: flex;

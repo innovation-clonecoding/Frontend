@@ -12,11 +12,17 @@ const DetailAccount = ({profileUrl, nickname, introduction}) => {
   return (
     <StyledDiv>
       <StyledFlexDiv>
-        <StyledImg
-          src={profileUrl}
+      {profileUrl?
+      (<StyledImg
+        src={profileUrl}
+        onError={handleImgError}
+        alt="profile_img"
+      />):
+        (<StyledImg
+          src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
           onError={handleImgError}
           alt="profile_img"
-        />
+        />)}
         <StyledUserInfo>
           <StyledUserName>{nickname}</StyledUserName>
           <StyledIntroduction>{introduction}</StyledIntroduction>
