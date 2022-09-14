@@ -49,6 +49,7 @@ const WriteTitle = ({
           height: "8px",
           backgroundColor: "#495057",
           border: "none",
+          marginTop:"1rem",
           width: "80px",
         }}
       />

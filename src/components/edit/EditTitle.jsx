@@ -42,6 +42,7 @@ const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle }) => {
         style={{
           height: "8px",
           backgroundColor: "#495057",
+          marginTop:"1rem",
           border: "none",
           width: "80px",
         }}

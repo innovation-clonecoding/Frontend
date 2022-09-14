@@ -48,7 +48,7 @@ function NavBar() {
               </>
             ) : (
               <>
-                <button className="p-2 m-auto text-white duration-200 bg-black border-2 hover:bg-white hover:text-black rounded-3xl ">
+                <button className="p-2 m-auto text-white duration-200 bg-black border-2 hover:bg-white hover:text-black rounded-3xl " onClick={()=>{navigate('/write')}}>
                   새 글 작성
                 </button>
                 <button
