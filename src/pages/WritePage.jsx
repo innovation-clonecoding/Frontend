@@ -13,15 +13,18 @@ const WritePage = () => {
   const token = useToken()
   const nickname = useDecodeToken(token)
   const [detail, setDetail] = useState(null)
-  console.log(nickname)
-  const getData = async () => {
+  const getNewPost = async () => {
     await axios.get(`http://15.164.163.50:8080/member/mypage/${nickname}`).then((res) => {
-    console.log(detail)  
-    setDetail(res.data.data);
+      setDetail(res.data.data.postList);
     });
   };
+  // console.log(detail)
+  // const newPost = detail&&detail.length-1
+  // const postId=detail[newPost]
+  // console.log(postId)
+
 useEffect(()=>{
-  getData()
+  getNewPost()
 },[])
   const navigate = useNavigate()
   const [markdown, setMarkdown] = useState("");
@@ -42,7 +45,7 @@ useEffect(()=>{
     // }).catch((err)=>{
     //   console.log(err)
     // });
-    navigate(-1)
+    navigate(`/post/`)
   };
 
 return (
