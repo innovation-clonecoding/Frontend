@@ -107,21 +107,21 @@ const TagContainer = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const ChooseTag = styled.div`
-  flex-shrink: 0;
-  height: 1.5rem;
-  font-size: 0.75rem;
-  border-radius: 0.75rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  line-height: 1.5;
-  background: #12b886;
-  color: white;
-  text-decoration: none;
-`;
+// const ChooseTag = styled.div`
+//   flex-shrink: 0;
+//   height: 1.5rem;
+//   font-size: 0.75rem;
+//   border-radius: 0.75rem;
+//   padding-left: 0.75rem;
+//   padding-right: 0.75rem;
+//   display: flex;
+//   -webkit-box-align: center;
+//   align-items: center;
+//   line-height: 1.5;
+//   background: #12b886;
+//   color: white;
+//   text-decoration: none;
+// `;
 
 const NotChooseTag = styled.div`
   flex-shrink: 0;
@@ -134,11 +134,20 @@ const NotChooseTag = styled.div`
   -webkit-box-align: center;
   align-items: center;
   line-height: 1.5;
-  background: #f8f9fa;
+  /* background: #f8f9fa; */
+  background: ${(props) => props.color};
   color: #212529;
   text-decoration: none;
   margin-left: 10px;
+  cursor: pointer;
 `;
+function ChooseTag({ children, color, ...rest }) {
+  return (
+    <NotChooseTag color={color} {...rest}>
+      {children}
+    </NotChooseTag>
+  );
+}
 
 const ContentsBox = styled.div`
   padding-bottom: 4rem;

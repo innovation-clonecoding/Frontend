@@ -95,6 +95,22 @@ export const userApis = {
       return error.response;
     }
   },
+  tag: async (payload) => {
+    try {
+      const { data } = await api.get(`/member/mypage/${payload}`);
+      return data.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
+  getTagData: async (nickName, tagName) => {
+    try {
+      const { data } = await api.get(`velog/${nickName}?tag=${tagName}`);
+      return data.data.postList;
+    } catch (error) {
+      return error.response;
+    }
+  },
   kakaoLogin: (code) => {
     /* 토큰이 없을 경우 -> 즉 소셜 로그인 처음하는 회원 */
     // 백엔드 주소 뒤에 인가코드 붙여서 보내야 함
