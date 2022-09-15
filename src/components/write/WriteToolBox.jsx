@@ -6,21 +6,37 @@ import { MdFormatStrikethrough, MdCode } from "react-icons/md";
 import { IoMdQuote, IoMdImage } from "react-icons/io";
 import { useState } from "react";
 import { useEffect } from "react";
+import { userApis } from "api/userApi";
 
 const WriteToolBox = ({setImage, setHeader, setTextStyle}) => {
-  const [imageUpload, setImageUpload] = useState([])
-
+  const [imageURL, setImageURL] = useState([])
   useEffect(()=>{
-    setImage(imageUpload)
+    setImage(imageURL)
   })
-
   const upLoadImg = useRef()
   const openFile = () => {
     upLoadImg.current.click()
   }
   const onChange = e => {
-    const img = e.target.files[0]
-    setImageUpload([...imageUpload, URL.createObjectURL(img)])
+    e.preventDefault()
+    if(e.target.files){
+      const img = e.target.files[0]
+      const formData = new FormData()
+      formData.append('image', img)
+      userApis.uploadImage(formData)
+      .then((res)=>{
+        const image = res.data.data
+        console.log(image)
+        const pushImage=(img)=>{
+          setImageURL((prev)=>[...prev, img])
+        }
+        pushImage(image)
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+      console.log(imageURL)
+    }
   }
   return (
     <StyledDiv>

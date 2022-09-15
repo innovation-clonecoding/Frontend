@@ -23,13 +23,18 @@ const WriteTextArea = ({
     if (image) {
       insertImg();
     }
+  }, [image]);
+
+  useEffect(() => {
     if (header) {
       insertHeader();
     }
+  }, [header]);
+  useEffect(() => {
     if (textStyle) {
       insertTextStyle();
     }
-  }, [image, header, textStyle]);
+  }, [textStyle]);
 
   const textArea = document.querySelector(".autoResize");
 

@@ -4,7 +4,7 @@ import EditToolBox from "./EditToolBox";
 
 const EditTitle = ({ setTitle, setImage, setTag, setHeader, setTextStyle, title, tag}) => {
   const [tagItem, setTagItem] = useState("");
-console.log(tag)
+
   const onKeyPress = (e) => {
     if (e.target.value !== "" && e.key === "Enter") {
       if(!tag.includes(tagItem)){
