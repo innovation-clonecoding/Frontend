@@ -1,7 +1,6 @@
 import DetailAccount from "components/detail/DetailAccount";
 // import DetailComment from "components/detail/DetailComment";
 import DetailContent from "components/detail/DetailContent";
-import DetailRecommend from "components/detail/DetailRecommend";
 import DetailTitle from "components/detail/DetailTitle";
 import styled from "styled-components";
 import React from "react";
@@ -10,7 +9,6 @@ import DetailFixedButton from "components/detail/DetailFixedButton";
 import Comments from "components/comment/Comments";
 // import Comments from "components/comment/Comments";
 import { useEffect } from "react";
-import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { userApis } from "api/userApi";
@@ -81,7 +79,6 @@ const DetailPage = () => {
           <DetailTitle {...post} />
           <DetailContent {...post} />
           <DetailAccount {...post} />
-          {/* <DetailRecommend {...post} /> */}
           <Comments commentList={post?.commentsList} {...post} />
         </StyledInnerDiv>
       </StyledDiv>

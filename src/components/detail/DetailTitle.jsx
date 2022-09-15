@@ -14,7 +14,6 @@ const DetailTitle = ({ title, nickname, date, tag }) => {
     navigate('/')
   }
 
-	console.log(title);
 	//로그인 상태에 따른 버튼 변화
 	return (
 		<StyledDiv>

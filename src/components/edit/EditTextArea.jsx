@@ -117,7 +117,6 @@ const EditTextArea = ({
     console.log(selectedCursor);
     setTextStyle("");
   };
-  console.log(content)
   return (
     <StyledTextArea
       className="autoResize"

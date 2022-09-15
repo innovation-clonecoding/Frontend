@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const DetailContent = ({ content }) => {
-	console.log(content);
 	document.documentElement.setAttribute("data-color-mode", "light");
 
 	return (
