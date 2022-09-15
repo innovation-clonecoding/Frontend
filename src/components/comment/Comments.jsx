@@ -8,8 +8,9 @@ function Comments({ commentList, postId }) {
 	const [selectComment, setSelectComment] = useState();
 	const [onEdit, setOnEdit] = useState(false);
 
-	const comment = useInput("");
-	const editInput = useInput("");
+	const [comment, setComment, commentHandler] = useInput();
+	const [editInput, setEditInput, editInputHandler] = useInput();
+	// const editInput = useInput("");
 
 	useEffect(() => {
 		userApis.getUserInfo().then((res) => setNickName(res.data.nickname));
@@ -17,13 +18,13 @@ function Comments({ commentList, postId }) {
 
 	const addComment = () => {
 		apis
-			.postComment(postId, comment.value)
-			.then(comment.setValue(""))
+			.postComment(postId, comment)
+			.then(setComment(""))
 			.then(alert("댓글이 작성되었습니다."));
 	};
 	const editComment = (commentId) => {
 		apis
-			.editComment(postId, editInput.value, commentId)
+			.editComment(postId, editInput, commentId)
 			.then((res) => console.log(res))
 			.then(alert("댓글이 수정되었습니다."));
 	};
@@ -43,8 +44,8 @@ function Comments({ commentList, postId }) {
 				<input
 					className="p-4 pb-16 border-2 border-gray-100 rounded-lg h-28"
 					placeholder="댓글을 작성하세요"
-					value={comment.value}
-					onChange={comment.changeHandler}
+					value={comment}
+					onChange={commentHandler}
 				/>
 				<div className="mr-10 text-right mt-7">
 					<button
@@ -102,8 +103,8 @@ function Comments({ commentList, postId }) {
 											<input
 												className="p-4 pb-16 border-2 border-gray-100 rounded-lg h-28"
 												placeholder="댓글을 작성하세요"
-												value={editInput.value}
-												onChange={editInput.changeHandler}
+												value={editInput}
+												onChange={editInputHandler}
 											/>
 											<div className="py-4 mr-10 text-right">
 												<button

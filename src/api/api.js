@@ -112,4 +112,7 @@ export const apis = {
 		api.delete(`/auth/comment/${commentId}`, {
 			PathVariable: commentId,
 		}),
+
+	//Mypage
+	getLikePost: () => api.get("/auth/member/mypage/likes"),
 };
