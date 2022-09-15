@@ -82,6 +82,12 @@ function NavBar() {
 										>
 											내 벨로그
 										</div>
+										<div
+											className="flex flex-col items-center justify-center h-10 hover:bg-slate-200 hover:text-green-500"
+											onClick={() => navigate("/like")}
+										>
+											좋아요한 포스트
+										</div>
 									</div>
 								</Dropdown>
 							</>

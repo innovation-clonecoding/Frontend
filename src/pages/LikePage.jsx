@@ -15,12 +15,12 @@ function LikePage() {
 		<>
 			<div className="relative z-0 w-full h-full bg-gray-50">
 				<NavBar />
-				<div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
-					<div className="w-[140px] ml-10 text-xl p-2 text-center border-b-2 border-black">
-						좋아한 포스트
-					</div>
-					{postList && postList.length > 1 ? (
-						postList.map((post) => (
+				<div className="w-[140px] ml-10 text-xl p-2 text-center border-b-2 border-black">
+					좋아한 포스트
+				</div>
+				{postList && postList.length > 1 ? (
+					postList.map((post) => (
+						<div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
 							<>
 								<div
 									className="relative flex flex-col m-auto bg-white border-2 shadow-xl w-80 h-96 rounded-xl hover:-translate-y-3 hover:duration-500"
@@ -50,11 +50,13 @@ function LikePage() {
 								</div>
 								{/* <div ref={obsRef}></div> */}
 							</>
-						))
-					) : (
-						<div>좋아요한 게시글이 없습니다.</div>
-					)}
-				</div>
+						</div>
+					))
+				) : (
+					<div className="h-screen mt-20 text-2xl font-bold text-center">
+						좋아요한 포스트가 없습니다 :(
+					</div>
+				)}
 			</div>
 		</>
 	);

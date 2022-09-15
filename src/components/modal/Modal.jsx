@@ -30,19 +30,18 @@ import { userApis } from "api/userApi";
 function Modal({ show, modalHandler }) {
 	const navigate = useNavigate();
 	const [isChange, onChangeHandler] = useChange();
-	const email = useInput();
-	// const [email, setEmail, onChangeEmail] = useInput();
+	const [email, setEmail, onChangeEmail] = useInput();
 
 	const doubleCheckEmail = () => {
-		if (!email.value) {
+		if (!email) {
 			alert("이메일을 입력하세요!");
 		} else {
 			userApis
-				.doubleCheck(email.value)
+				.doubleCheck(email)
 				.then((res) => {
 					const { data } = res;
 					if (res.data.msg === "회원가입을 진행하세요.") {
-						navigate(`/register`, { state: data.data.email.value });
+						navigate(`/register`, { state: data.data.email });
 					}
 				})
 				.catch((error) => {
@@ -88,8 +87,8 @@ function Modal({ show, modalHandler }) {
 										width="250px"
 										placeholder="이메일을 입력하세요"
 										name="email"
-										value={email.value}
-										onChange={email.changeHandler}
+										value={email}
+										onChange={onChangeEmail}
 									/>
 									<Button onClick={() => doubleCheckEmail()}>로그인</Button>
 								</ChildContainer>
