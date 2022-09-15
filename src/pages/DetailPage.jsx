@@ -75,7 +75,7 @@ const DetailPage = () => {
           <DetailTitle {...post} />
           <DetailContent {...post} />
           <DetailAccount {...post} />
-          <DetailRecommend {...post} />
+          {/* <DetailRecommend {...post} /> */}
           <Comments commentList={post?.commentsList} {...post} />
         </StyledInnerDiv>
       </StyledDiv>

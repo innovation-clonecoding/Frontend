@@ -117,13 +117,14 @@ const EditTextArea = ({
     console.log(selectedCursor);
     setTextStyle("");
   };
+  console.log(content)
   return (
     <StyledTextArea
       className="autoResize"
       placeholder="당신의 이야기를 적어보세요..."
       onKeyUp={autoTextAreaReize}
       onKeyDown={autoTextAreaReize}
-      defaultValue={content}
+      value={content}
       onChange={onChange}
     ></StyledTextArea>
   );
