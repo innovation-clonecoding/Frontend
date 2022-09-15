@@ -24,11 +24,13 @@ const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: white;
   width: 50vw;
   height: 80px;
   font-size: 28px;
   box-shadow: 0 0 8px rgb(0 0 0 / 20%);
   bottom: 0px;
+  z-index: 2;
 `;
 const StyledInnerDiv = styled.div`
   display: flex;

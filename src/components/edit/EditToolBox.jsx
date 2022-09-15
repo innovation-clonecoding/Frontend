@@ -6,77 +6,115 @@ import { MdFormatStrikethrough, MdCode } from "react-icons/md";
 import { IoMdQuote, IoMdImage } from "react-icons/io";
 import { userApis } from "api/userApi";
 
-const EditToolBox = ({setImage, setHeader, setTextStyle}) => {
-  const [imageURL, setImageURL] = useState([])
-  useEffect(()=>{
-    setImage(imageURL)
-  })
-  const upLoadImg = useRef()
+const EditToolBox = ({ setImage, setHeader, setTextStyle }) => {
+  const [imageURL, setImageURL] = useState([]);
+  useEffect(() => {
+    setImage([...imageURL, imageURL]);
+  },[]);
+  const upLoadImg = useRef();
   const openFile = () => {
-    upLoadImg.current.click()
-  }
-  const onChange = e => {
-    e.preventDefault()
-    if(e.target.files){
-      const img = e.target.files[0]
-      const formData = new FormData()
-      formData.append('image', img)
-      userApis.uploadImage(formData)
-      .then((res)=>{
-        const image = res.data.data
-        console.log(image)
-        const pushImage=(img)=>{
-          setImageURL((prev)=>[...prev, img])
-        }
-        pushImage(image)
-        console.log(res)
-      }).catch((err)=>{
-        console.log(err)
-      })
-      console.log(imageURL)
+    upLoadImg.current.click();
+  };
+  const onChange = (e) => {
+    e.preventDefault();
+    if (e.target.files) {
+      const img = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", img);
+      userApis
+        .uploadImage(formData)
+        .then((res) => {
+          const image = res.data.data;
+          console.log(image);
+          const pushImage = (img) => {
+            setImageURL([...imageURL, img]);
+          };
+          pushImage(image);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }
+  };
+  console.log(imageURL)
 
-  const [imageUpload, setImageUpload] = useState([])
-  useEffect(()=>{
-    setImage(imageUpload)
-  })
-  
-  
   return (
     <StyledDiv>
-      <div onClick={()=>{setHeader("# ")}}>
-        <TbH1/>
+      <div
+        onClick={() => {
+          setHeader("# ");
+        }}
+      >
+        <TbH1 />
       </div>
       <div>
-        <TbH2 onClick={()=>{setHeader("## ")}}/>
+        <TbH2
+          onClick={() => {
+            setHeader("## ");
+          }}
+        />
       </div>
       <div>
-        <TbH3 onClick={()=>{setHeader("### ")}} />
+        <TbH3
+          onClick={() => {
+            setHeader("### ");
+          }}
+        />
       </div>
       <div>
-        <TbH4 onClick={()=>{setHeader("#### ")}} />
+        <TbH4
+          onClick={() => {
+            setHeader("#### ");
+          }}
+        />
       </div>
       <StyledDivision>|</StyledDivision>
       <div>
-        <BiBold onClick={()=>{setTextStyle("**")}}/>
+        <BiBold
+          onClick={() => {
+            setTextStyle("**");
+          }}
+        />
       </div>
       <div>
-        <BiItalic onClick={()=>{setTextStyle("_")}}/>
+        <BiItalic
+          onClick={() => {
+            setTextStyle("_");
+          }}
+        />
       </div>
       <div>
-        <MdFormatStrikethrough onClick={()=>{setTextStyle("~~")}}/>
+        <MdFormatStrikethrough
+          onClick={() => {
+            setTextStyle("~~");
+          }}
+        />
       </div>
       <StyledDivision>|</StyledDivision>
       <div>
-        <IoMdQuote  onClick={()=>{setHeader("> ")}} />
+        <IoMdQuote
+          onClick={() => {
+            setHeader("> ");
+          }}
+        />
       </div>
       <div>
-        <input type='file' accept="image/*" ref={upLoadImg} style={{"display":"none"}} onChange={onChange}/>
-        <IoMdImage onClick={openFile}/>
+        <input
+          type="file"
+          accept="image/*"
+          ref={upLoadImg}
+          style={{ display: "none" }}
+          onChange={onChange}
+        />
+        <IoMdImage onClick={openFile} />
       </div>
       <div>
-        <MdCode onClick={()=>{setTextStyle("```")}}/>
+        <MdCode
+          onClick={() => {
+            setTextStyle("```");
+          }}
+        />
       </div>
     </StyledDiv>
   );
