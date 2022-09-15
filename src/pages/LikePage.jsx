@@ -1,45 +1,26 @@
-import { apis } from "api/api";
-import NavBar from "components/navbar/NavBar";
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import NavBar from "components/navbar/NavBar";
+import { apis } from "api/api";
 
-function MainPage() {
-	const navigate = useNavigate();
-
+function LikePage() {
 	const [postList, setPostList] = useState();
-	const [page, setPage] = useState(1);
-	const preventRef = useRef(true);
-	const obsRef = useRef(null);
-	const endRef = useRef(false);
-
 	useEffect(() => {
-		apis.getPost().then((response) => setPostList(response.data.data));
-	}, []);
+		apis.getLikePost().then((res) => setPostList(res.data.data));
+	});
 
-	console.log(postList);
-	useEffect(() => {
-		const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
-		if (obsRef.current) observer.observe(obsRef.current);
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
-
-	const obsHandler = (entries) => {
-		const target = entries[0];
-		if (!endRef.current && target.isIntersecting && preventRef.current) {
-			preventRef.current = false;
-			setPage((prev) => prev + 1);
-		}
-	};
+	const navigate = useNavigate();
 
 	return (
 		<>
 			<div className="relative z-0 w-full h-full bg-gray-50">
 				<NavBar />
-				<div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
-					{postList &&
-						postList.map((post) => (
+				<div className="w-[140px] ml-10 text-xl p-2 text-center border-b-2 border-black">
+					좋아한 포스트
+				</div>
+				{postList && postList.length > 1 ? (
+					postList.map((post) => (
+						<div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
 							<>
 								<div
 									className="relative flex flex-col m-auto bg-white border-2 shadow-xl w-80 h-96 rounded-xl hover:-translate-y-3 hover:duration-500"
@@ -69,11 +50,16 @@ function MainPage() {
 								</div>
 								{/* <div ref={obsRef}></div> */}
 							</>
-						))}
-				</div>
+						</div>
+					))
+				) : (
+					<div className="h-screen mt-20 text-2xl font-bold text-center">
+						좋아요한 포스트가 없습니다 :(
+					</div>
+				)}
 			</div>
 		</>
 	);
 }
 
-export default MainPage;
+export default LikePage;

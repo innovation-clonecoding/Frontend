@@ -21,7 +21,6 @@ const DetailPage = () => {
   const { postId } = useParams();
   const [detail, setDetail] = useState(null);
   const [like, setLike] = useState();
-  const [isLike, setIsLike] = useState(false);
   const dispatch = useDispatch();
 
   /* 기존 데이터 get 코드 */
@@ -55,11 +54,9 @@ const DetailPage = () => {
       const str = String(res.msg);
       if (str.includes("완료") === true) {
         setLike(like + 1);
-        // setIsLike(true);
         localStorage.setItem(`isLike-${postId}`, true);
       } else {
         setLike(like - 1);
-        // setIsLike(false);
         localStorage.setItem(`isLike-${postId}`, false);
       }
     });
@@ -79,7 +76,7 @@ const DetailPage = () => {
           <DetailContent {...post} />
           <DetailAccount {...post} />
           <DetailRecommend {...post} />
-          <Comments />
+          <Comments commentList={post?.commentsList} {...post} />
         </StyledInnerDiv>
       </StyledDiv>
     </>
