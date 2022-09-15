@@ -22,8 +22,7 @@ const [markdown, setMarkdown] = useState("");
   const [image, setImage] = useState([]);
   const { postId } = useParams();
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
+  const onSubmitHandler = async () => {
     const data = {
       postId: postId,
       title: detail?.title,

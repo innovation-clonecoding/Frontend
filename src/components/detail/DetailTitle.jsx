@@ -9,8 +9,7 @@ const DetailTitle = ({ title, nickname, date, tag }) => {
 	const { postId } = useParams();
 	const navigate = useNavigate();
 	const token = useToken();
-  const postDeleteHandler = e => {
-    e.preventDefault()
+  const postDeleteHandler = () => {
     userApis.deletePost(postId)
     navigate('/')
   }
