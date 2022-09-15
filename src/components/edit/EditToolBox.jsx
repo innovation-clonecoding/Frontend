@@ -25,7 +25,6 @@ const EditToolBox = ({ setImage, setHeader, setTextStyle }) => {
         .uploadImage(formData)
         .then((res) => {
           const image = res.data.data;
-          console.log(image);
           const pushImage = (img) => {
             setImageURL([...imageURL, img]);
           };
@@ -37,7 +36,6 @@ const EditToolBox = ({ setImage, setHeader, setTextStyle }) => {
         });
     }
   };
-  console.log(imageURL)
 
   return (
     <StyledDiv>

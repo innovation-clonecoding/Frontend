@@ -31,11 +31,6 @@ const [markdown, setMarkdown] = useState("");
       tag: detail?.tag,
     };
     userApis.editPost(data, postId);
-    // await axios.patch(`http://15.164.163.50:8080/auth/post/${postId}`, data).then((res) => {
-    //   console.log(res);
-    // }).catch((err)=>{
-    //   console.log(err)
-    // });
     navigate(`/detail/${postId}`);
   };
   const editTag = (tag) => {

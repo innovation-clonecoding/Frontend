@@ -4,15 +4,30 @@ import WriteShow from "../components/write/WriteShow";
 import styled from "styled-components";
 import { userApis } from "api/userApi";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const WritePage = () => {
+  // const token = useToken()
+  // const nickname = useDecodeToken(token)
+  // const [detail, setDetail] = useState(null)
+  // const getNewPost = async () => {
+  //   await axios.get(`http://15.164.163.50:8080/member/mypage/${nickname}`).then((res) => {
+  //     setDetail(res.data.data.postList);
+  //   });
+  // };
   
+  // const newPost = detail&&detail.length-1
+  // const postId=detail[detail?.length-1]
+  // console.log(postId)
+  // console.log(postId)
+
   const navigate = useNavigate()
   const [markdown, setMarkdown] = useState("");
   const [title, setTitle] = useState('')
   const [image, setImage] = useState([])
   const [tag, setTag] = useState([]);
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
     const data = {
       title: title,
       content: markdown,
