@@ -39,16 +39,20 @@ function LikePage() {
 
 										<div className="flex flex-col p-4">
 											<div className="text-xl font-bold">{post.title}</div>
-											<div className="pt-2">{post.content}</div>
+											<div className="h-10 pt-2 truncate">{post.content}</div>
 										</div>
 										<span className="p-4 pb-2 mt-3 text-sm text-gray-500">
 											{post.date} · {post.commentsNum}개의 댓글
 										</span>
-										<div className="absolute flex items-center w-full ml-4 text-sm text-gray-500 h-fit bottom-2">
-											by&nbsp;
-											<div className="font-bold text-black">
+										<div className="absolute flex items-center justify-between w-full h-fit bottom-2">
+											<div className="ml-4 font-bold text-black">
+												<span className="text-sm font-normal text-gray-500">
+													{" "}
+													by&nbsp;
+												</span>
 												{post.nickname}
 											</div>
+											<div className="m-0 mr-4 text-xs">🖤 {post.likesNum}</div>
 										</div>
 									</div>
 									{/* <div ref={obsRef}></div> */}
