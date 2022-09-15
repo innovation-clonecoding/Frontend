@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import DetailTags from "./DetailTags";
 import useToken from "hooks/useToken";
 import { useNavigate, useParams } from "react-router-dom";
+import { userApis } from "api/userApi";
 
 const DetailTitle = ({ title, nickname, date, tag }) => {
 	const { postId } = useParams();
 	const navigate = useNavigate();
 	const token = useToken();
+  const postDeleteHandler = e => {
+    e.preventDefault()
+    userApis.deletePost(postId)
+    navigate('/')
+  }
+
 	console.log(title);
 	//로그인 상태에 따른 버튼 변화
 	return (
@@ -28,7 +35,11 @@ const DetailTitle = ({ title, nickname, date, tag }) => {
 						>
 							수정
 						</StyledLikeButton>
-						<StyledLikeButton>삭제</StyledLikeButton>
+						<StyledLikeButton
+            onClick={
+              postDeleteHandler
+            }
+            >삭제</StyledLikeButton>
 					</div>
 				) : null}
 			</StyledNameDateLikeDiv>

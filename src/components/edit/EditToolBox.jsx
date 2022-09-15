@@ -7,7 +7,7 @@ import { IoMdQuote, IoMdImage } from "react-icons/io";
 
 const EditToolBox = ({setImage, setHeader, setTextStyle}) => {
   const [imageUpload, setImageUpload] = useState([])
-
+  
   useEffect(()=>{
     setImage(imageUpload)
   })

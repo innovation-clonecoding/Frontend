@@ -7,6 +7,7 @@ import EditTitle from "./EditTitle";
 const Edit = (props) => {
   const handleChange = (e) => {
     props.setMarkdown(e.target.value);
+    props.setContent(e.target.value)
   };
   const [header, setHeader] = useState("");
   const [textStyle, setTextStyle] = useState("");

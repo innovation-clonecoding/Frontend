@@ -129,13 +129,21 @@ export const userApis = {
   },
   editPost: async (data, postId) => {
     await api
-      .put(`/auth/post/${postId}`, data)
+      .patch(`/auth/post/${postId}`, data)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+  },
+  deletePost: async (postId) => {
+    await api.delete(`/auth/post/${postId}`)
+    .then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
   },
 };
 

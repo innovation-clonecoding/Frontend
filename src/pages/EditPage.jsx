@@ -18,9 +18,7 @@ const EditPage = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  const [markdown, setMarkdown] = useState("");
-  const [title, setTitle] = useState("");
+const [markdown, setMarkdown] = useState("");
   const [image, setImage] = useState([]);
   const { postId } = useParams();
 
@@ -28,9 +26,9 @@ const EditPage = () => {
     e.preventDefault();
     const data = {
       postId: postId,
-      title: title,
-      content: markdown,
-      imgUrl: image,
+      title: detail?.title,
+      content: detail?.content,
+      imgUrl: detail?.image,
       tag: detail?.tag,
     };
     userApis.editPost(data, postId);
@@ -44,14 +42,23 @@ const EditPage = () => {
   const editTag = (tag) => {
     setDetail((prev) => ({ ...prev, tag})); //useState(prev) // prev State
   };
-  console.log(detail?.tag)
+  const editTitle = (title)=> {
+    setDetail((prev)=> ({ ...prev, title}))
+  }
+  const editContent = (content)=> {
+    setDetail((prev)=> ({...prev, content}))
+  }
+  const editImg = (image)=>{
+    setDetail((prev)=>({...prev, image}))
+  }
   return (
     <StyledDiv>
       <Edit
         setMarkdown={setMarkdown}
+        setContent={editContent}
         onSubmit={onSubmitHandler}
-        setTitle={setTitle}
-        setImage={setImage}
+        setTitle={editTitle}
+        setImage={editImg}
         setTag={editTag}
         image={image}
         {...detail}
