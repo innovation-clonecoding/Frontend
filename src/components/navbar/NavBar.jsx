@@ -27,15 +27,15 @@ function NavBar() {
 	return (
 		<>
 			<div className="h-[64px] w-full grid">
-				<div className="flex">
-					<h1
-						className="flex-grow ml-20 font-bold text-[30px] mt-2"
+				<div className="flex justify-between">
+					<div
+						className="ml-20 font-bold text-[30px] mt-2 hover:cursor-pointer"
 						onClick={() => {
 							navigate("/");
 						}}
 					>
-						velog
-					</h1>
+						<div className="hover:cursor-pointer">velog</div>
+					</div>
 					<div className="flex gap-4 mr-20">
 						<button>
 							<FiSearch
