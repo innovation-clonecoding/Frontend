@@ -69,16 +69,20 @@ function ItemConponent({ item }) {
           }}
           onClick={() => navigate(`/detail/${postId}`)}
         >
-          <div
-            style={{
-              paddingTop: "52.356%",
-              marginBottom: "1rem",
-              width: "100%",
-              position: "relative",
-            }}
-          >
-            <ContentsImage src="https://reactjs-kr.firebaseapp.com/logo-og.png" />
-          </div>
+          {imgUrl ? (
+            <div
+              style={{
+                paddingTop: "52.356%",
+                marginBottom: "1rem",
+                width: "100%",
+                position: "relative",
+              }}
+            >
+              <ContentsImage src={imgUrl} />
+            </div>
+          ) : (
+            <></>
+          )}
         </a>
         {/* [내 벨로그] 게시글 타이틀 */}
         <a
