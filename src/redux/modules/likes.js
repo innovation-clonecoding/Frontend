@@ -34,6 +34,20 @@ export const __getLikes = createAsyncThunk(
   }
 );
 
+export const __getTag = createAsyncThunk(
+  "getTag",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `http://15.164.163.50:8080/member/mypage/${payload}`
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response);
+    }
+  }
+);
+
 export const likes = createSlice({
   name: "likes",
   initialState,
@@ -47,6 +61,9 @@ export const likes = createSlice({
       state.isLoding = false;
     },
     [__getLikes.fulfilled]: (state, action) => {
+      state.isLoding = false;
+    },
+    [__getTag.fulfilled]: (state, action) => {
       state.isLoding = false;
     },
     [__getLikes.rejected]: (state, action) => {
