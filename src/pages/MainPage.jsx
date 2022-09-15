@@ -14,8 +14,8 @@ function MainPage() {
 
   useEffect(() => {
     apis.getPost().then((response) => setPostList(response.data.data));
-  }, [page]);
-  console.log(postList);
+  }, [postList]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
     if (obsRef.current) observer.observe(obsRef.current);
@@ -34,8 +34,9 @@ function MainPage() {
 
   return (
     <>
-      <div className="relative z-0 w-full h-full bg-gray-50">
+      <div className="relative z-0 w-full h-screen bg-gray-50">
         <NavBar />
+
         <div className="w-[1728px] w-min-[800px] ml-auto mr-auto grid grid-cols-5 gap-8 mt-10 z-0">
           {postList &&
             postList.map((post) => (
