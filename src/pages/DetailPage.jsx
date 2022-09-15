@@ -16,12 +16,14 @@ import { useParams } from "react-router-dom";
 import { userApis } from "api/userApi";
 import { useDispatch } from "react-redux";
 import { __getLikes, __getDetailData } from "redux/modules/likes";
+import useToken from "hooks/useToken";
 
 const DetailPage = () => {
   const { postId } = useParams();
   const [detail, setDetail] = useState(null);
   const [like, setLike] = useState();
   const dispatch = useDispatch();
+  const token = useToken();
 
   /* 기존 데이터 get 코드 */
   //   const getData = async () => {
@@ -47,19 +49,23 @@ const DetailPage = () => {
   }, [dispatch]);
 
   const onLikesClick = () => {
-    const data = {
-      postId: postId,
-    };
-    userApis.likes(data).then((res) => {
-      const str = String(res.msg);
-      if (str.includes("완료") === true) {
-        setLike(like + 1);
-        localStorage.setItem(`isLike-${postId}`, true);
-      } else {
-        setLike(like - 1);
-        localStorage.setItem(`isLike-${postId}`, false);
-      }
-    });
+    if (token) {
+      const data = {
+        postId: postId,
+      };
+      userApis.likes(data).then((res) => {
+        const str = String(res.msg);
+        if (str.includes("완료") === true) {
+          setLike(like + 1);
+          localStorage.setItem(`isLike-${postId}`, true);
+        } else {
+          setLike(like - 1);
+          localStorage.setItem(`isLike-${postId}`, false);
+        }
+      });
+    } else {
+      alert("로그인이 필요합니다!");
+    }
   };
 
   return (
