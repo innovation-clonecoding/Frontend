@@ -161,6 +161,10 @@ export const userApis = {
       console.log(err)
     })
   },
+  uploadImage: async(data)=>{
+    const response = await api.post(`/auth/post/img`, data)
+    return response
+  }
 };
 
 const refreshAccessToken = async () => {

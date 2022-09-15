@@ -4,22 +4,45 @@ import { TbH1, TbH2, TbH3, TbH4 } from "react-icons/tb";
 import { BiBold, BiItalic } from "react-icons/bi";
 import { MdFormatStrikethrough, MdCode } from "react-icons/md";
 import { IoMdQuote, IoMdImage } from "react-icons/io";
+import { userApis } from "api/userApi";
 
 const EditToolBox = ({setImage, setHeader, setTextStyle}) => {
-  const [imageUpload, setImageUpload] = useState([])
-  
+  const [imageURL, setImageURL] = useState([])
   useEffect(()=>{
-    setImage(imageUpload)
+    setImage(imageURL)
   })
-
   const upLoadImg = useRef()
   const openFile = () => {
     upLoadImg.current.click()
   }
   const onChange = e => {
-    const img = e.target.files[0]
-    setImageUpload([...imageUpload, URL.createObjectURL(img)])
+    e.preventDefault()
+    if(e.target.files){
+      const img = e.target.files[0]
+      const formData = new FormData()
+      formData.append('image', img)
+      userApis.uploadImage(formData)
+      .then((res)=>{
+        const image = res.data.data
+        console.log(image)
+        const pushImage=(img)=>{
+          setImageURL((prev)=>[...prev, img])
+        }
+        pushImage(image)
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+      console.log(imageURL)
+    }
   }
+
+  const [imageUpload, setImageUpload] = useState([])
+  useEffect(()=>{
+    setImage(imageUpload)
+  })
+  
+  
   return (
     <StyledDiv>
       <div onClick={()=>{setHeader("# ")}}>
@@ -49,7 +72,7 @@ const EditToolBox = ({setImage, setHeader, setTextStyle}) => {
         <IoMdQuote  onClick={()=>{setHeader("> ")}} />
       </div>
       <div>
-        <input type='file' accept="image/jpg, image/png, image/jpeg, image/gif" ref={upLoadImg} style={{"display":"none"}} onChange={onChange}/>
+        <input type='file' accept="image/*" ref={upLoadImg} style={{"display":"none"}} onChange={onChange}/>
         <IoMdImage onClick={openFile}/>
       </div>
       <div>
